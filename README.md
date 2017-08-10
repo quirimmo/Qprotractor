@@ -1,2 +1,10 @@
 # Qprotractor
 An utility library for protractor used with AngularJS 
+
+chrome version: 
+webdriver-manager update --versions.chrome 2.24
+webdriver-manager start --versions.chrome 2.24
+
+lite-server for running app
+
+http://localhost:3000/sample/app/index.html#!/main

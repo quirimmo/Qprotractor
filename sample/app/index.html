@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <ul class="menu">
+        <li><a ui-sref="main" ui-sref-active="active">Main Page</a></li>
+        <li><a ui-sref="second-page" ui-sref-active="active">Second Page</a></li>
+    </ul>
+
+    <ui-view></ui-view>
+
+    <script src="./../../node_modules/angular/angular.js"></script>
+    <script src="./../../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controller/main.controller.js"></script>
+    <script src="config.js"></script>
+
+</body>
+
+</html>

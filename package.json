@@ -1,0 +1,34 @@
+{
+  "name": "qprotractor",
+  "version": "1.0.0",
+  "description": "An utility library for protractor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quirimmo/Qprotractor.git"
+  },
+  "keywords": [
+    "qprotractor",
+    "protractor",
+    "protractor utility",
+    "protractor library",
+    "protractor helper"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-ui-router": "^1.0.3"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0",
+    "protractor": "^5.1.2"
+  },
+  "author": "Quirino Lo Russo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quirimmo/Qprotractor/issues"
+  },
+  "homepage": "https://github.com/quirimmo/Qprotractor#readme"
+}
