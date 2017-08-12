@@ -67,24 +67,6 @@ describe('ElementFinder Tests', function() {
     
         });
     
-        describe('getValueOfRadioSelectedItem', function() {
-            
-            it('should get the value of the selected item in a radio', function() {
-                var genderRadios = element.all(by.model('genderRadio'));
-                expect(genderRadios.getValueOfRadioSelectedItem()).toEqual('Male');
-            });
-    
-        });
-    
-        describe('getLabelTextOfRadioSelectedItem', function() {
-            
-            it('should get the value of the label associated to the selected item in a radio', function() {
-                var genderRadios = element.all(by.model('genderRadio'));
-                expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
-            });
-    
-        });
-    
         describe('setValueIfEnabledOrProceed', function() {
     
             it('should not set the value if the element is disabled, and just go through without errors', function() {
