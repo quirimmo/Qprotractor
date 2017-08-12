@@ -1,3 +1,26 @@
 <div>
-    I am the main template!
+    <h1>I am the main template!</h1>
+
+    <ng-form>
+        <div>
+            <label for="username">Username: </label>
+            <input type="text" id="username" ng-model="username" placeholder="Type your username" />
+        </div>
+        <br>
+        <div>
+            <label for="marital-status">Marital Status: </label>
+            <select id="marital-status" ng-options="maritalStatusItem for maritalStatusItem in maritalStatusList" ng-model="maritalStatus">
+                <option value="">---Please select---</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label>
+                Do you have dogs:
+                <input type="checkbox" id="dogs-checkbox" ng-model="dogsCheckbox" ng-true-value="'YES'" ng-false-value="'NO'">
+            </label>
+        </div>
+        <br>
+    </ng-form>
+
 </div>

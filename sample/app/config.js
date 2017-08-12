@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', ['ui.router'])
+angular.module('myApp')
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
@@ -13,12 +13,9 @@ angular.module('myApp', ['ui.router'])
     var secondPageState = {
         name: 'second-page',
         url: '/second-page',
-        templateUrl: 'template/second-page.html'
+        templateUrl: 'template/second-page.html',
+        controller: 'SecondPageController'
     };
-    // $routeProvider.when('/', {
-    //     templateUrl: 'template/main.html'
-    //         // controller: 'View1Ctrl'
-    // }).otherwise({redirectTo: '/'});
 
     $stateProvider.state(mainState);
     $stateProvider.state(secondPageState);
