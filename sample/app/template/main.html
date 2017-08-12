@@ -21,6 +21,32 @@
             </label>
         </div>
         <br>
+        <div>
+            <label>Gender: </label>
+            <br>
+            <label for="gender-male">
+                <input type="radio" id="gender-male" ng-model="genderRadio" ng-value="'Male'">
+                I am a Male
+            </label>
+            <br>
+            <label for="gender-female">
+                <input type="radio" id="gender-female" ng-model="genderRadio" ng-value="'Female'">
+                I am a Female
+            </label>
+        </div>
+        <br>
+        <div>
+            <label for="disabled-field">Disbled Field: </label>
+            <input type="text" id="disabled-field" ng-model="disabledField" ng-disabled="true">
+            <label for="enabled-field">Enabled Field: </label>
+            <input type="text" id="enabled-field" ng-model="enabledField" ng-disabled="false">
+        </div>
+        <br>
+        <div>
+            <label for="hidden-field">Hidden Field: </label>
+            <input type="text" id="hidden-field" ng-model="hiddenField" ng-hide="true">
+        </div>
+        <br>
     </ng-form>
 
 </div>

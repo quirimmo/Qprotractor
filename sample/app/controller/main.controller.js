@@ -10,4 +10,11 @@ angular.module('myApp')
 
     $scope.dogsCheckbox = 'YES';
 
+    $scope.genderRadio = 'Male';
+
+    $scope.disabledField = 'I am a disabled field';
+    $scope.enabledField = 'I am an enabled field';
+
+    $scope.hiddenField = 'Hidden field';
+
 }]);
