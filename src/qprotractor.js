@@ -33,8 +33,8 @@ function setInputValue(value) {
 
 function clearAndSetInputValue(value) {
     return this.clear()
-    .then(onClearGenericInput.bind(this, value))
-    .catch(protractor.onCatchGenericError);
+        .then(onClearGenericInput.bind(this, value))
+        .catch(protractor.onCatchGenericError);
 
     function onClearGenericInput(valueToSet) {
         return this.sendKeys(valueToSet);

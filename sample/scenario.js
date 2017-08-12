@@ -35,8 +35,6 @@ describe('angularjs homepage todo list', function() {
 
     });
 
-    
-
     describe('ElementFinder.getIdValue', function() {
         
         it('should get the id of a field', function() {
