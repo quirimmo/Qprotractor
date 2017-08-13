@@ -3,19 +3,19 @@
 
     <ng-form>
         <div>
-            <label for="username">Username: </label>
+            <label class="elementsToSort" for="username">Username: </label>
             <input type="text" id="username" ng-model="username" placeholder="Type your username" />
         </div>
         <br>
         <div>
-            <label for="marital-status">Marital Status: </label>
+            <label class="elementsToSort" for="marital-status">Marital Status: </label>
             <select id="marital-status" ng-options="maritalStatusItem for maritalStatusItem in maritalStatusList" ng-model="maritalStatus">
                 <option value="">---Please select---</option>
             </select>
         </div>
         <br>
         <div>
-            <label>
+            <label class="elementsToSort">
                 Do you have dogs:
                 <input type="checkbox" id="dogs-checkbox" ng-model="dogsCheckbox" ng-true-value="'YES'" ng-false-value="'NO'">
             </label>
@@ -24,26 +24,26 @@
         <div>
             <label>Gender: </label>
             <br>
-            <label for="gender-male">
+            <label class="elementsToSort" for="gender-male">
                 <input type="radio" id="gender-male" ng-model="genderRadio" ng-value="'Male'">
                 I am a Male
             </label>
             <br>
-            <label for="gender-female">
+            <label class="elementsToSort" for="gender-female">
                 <input type="radio" id="gender-female" ng-model="genderRadio" ng-value="'Female'">
                 I am a Female
             </label>
         </div>
         <br>
         <div>
-            <label for="disabled-field">Disabled Field: </label>
+            <label class="elementsToSort" for="disabled-field">Disabled Field: </label>
             <input type="text" id="disabled-field" ng-model="disabledField" ng-disabled="true">
-            <label for="enabled-field">Enabled Field: </label>
+            <label class="elementsToSort" for="enabled-field">Enabled Field: </label>
             <input type="text" id="enabled-field" ng-model="enabledField" ng-disabled="false">
         </div>
         <br>
         <div>
-            <label for="hidden-field">Hidden Field: </label>
+            <label class="elementsToSort" for="hidden-field">Hidden Field: </label>
             <input type="text" id="hidden-field" ng-model="hiddenField" ng-hide="true">
         </div>
         <br>

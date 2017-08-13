@@ -19,7 +19,9 @@
   ],
   "dependencies": {
     "angular": "^1.6.4",
-    "angular-ui-router": "^1.0.3"
+    "angular-ui-router": "^1.0.3",
+    "asyncawait": "^1.0.6",
+    "js-sorting": "^3.0.4"
   },
   "devDependencies": {
     "lite-server": "^2.3.0",

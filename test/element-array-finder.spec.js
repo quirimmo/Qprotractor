@@ -22,4 +22,14 @@ describe('ElementArrayFinder Tests', function() {
 
     });
 
+    describe('sort', function() {
+
+        it('should sort the elements depending on the given function', function() {
+            var elementsToSort = element.all(by.className('elementsToSort'));
+            elementsToSort.sort();
+            // expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
+        });
+
+    });
+
 });
