@@ -114,21 +114,90 @@ function getLabelTextOfRadioSelectedItem() {
         .catch(onCatchGenericError);
 }
 
+
 function sort() {
-    
-    
-    
-    var reverseCompare = async(function (a, b) {
+
+    let promises = [];
+
+    var reverseCompare = function(a, b) {
+        let deferred = protractor.promise.defer();
+        promises.push(deferred);
         let listPromises = [a.getText(), b.getText()];
-        await(protractor.promise.all(listPromises).then((values) => {
-            return values[0] - values[1];
-        }));
+        protractor.promise.all(listPromises)
+            .then((values) => {
+                setTimeout(function() {
+                    deferred.fulfill();
+                }, 1000);
+                return values[0] - values[1];
+            });
+    };
+
+    var sortTheArray = function(arrayOfElementFinders) {
+        let res = mergeSort(arrayOfElementFinders, reverseCompare);
+        return res;
+    };
+
+    this.then((elements) => {
+        var arrayOfElementFinders = [elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]]; 
+        // var arrayOfElementFinders = [elements[0], elements[1], elements[2]]; 
+        // let arrayOfElementFinders = [];
+        // for (let i = 0; i < elements.length; i++) {
+        //     arrayOfElementFinders.push(elements[i]);
+        // }
+        let sortedArray = sortTheArray(arrayOfElementFinders);
+        // sortedArray.forEach((el) => {
+        //     el.getText().then((text) => {
+        //         console.log(text);
+        //     });
+        // });
+        setTimeout(function() {
+            // protractor.promise.all(promises)
+            // .then(() => {
+            //     sortedArray.forEach((el) => {
+            //         el.getText().then((text) => {
+            //             console.log(text);
+            //         });
+            //     });
+            // });
+            sortedArray.forEach((el) => {
+                el.getText().then((text) => {
+                    console.log(text);
+                });
+            });
+        }, 10000);
+        
+
+        // var mock = function (array) {   
+        //     var webElements = sortedArray.map(function (ef) {
+        //         return ef.getWebElement();
+        //     });
+        //     return protractor.promise.fulfilled(webElements);
+        // }
+        // let list = new protractor.ElementArrayFinder(this.browser_, mock, this.locator_, this.actionResults_);
+        // list.getText().then((texts) => {
+        //     console.log(texts);
+        // });
+
     });
 
-    var sortTheArray = async(function (arrayOfElementFinders) {
-        let res = await(mergeSort(arrayOfElementFinders, reverseCompare)); 
-        return res;
-    });
+    // var reverseCompare = async(function (a, b) {
+    //     let listPromises = [a.getText(), b.getText()];
+    //     await(protractor.promise.all(listPromises).then((values) => {
+    //         return values[0] - values[1];
+    //     }));
+    // });
+
+    // var reverseCompare = async(function (a, b) {
+    //     let listPromises = [a.getText(), b.getText()];
+    //     await(protractor.promise.all(listPromises).then((values) => {
+    //         return values[0] - values[1];
+    //     }));
+    // });
+
+    // var sortTheArray = async(function (arrayOfElementFinders) {
+    //     let res = await(mergeSort(arrayOfElementFinders, reverseCompare)); 
+    //     return res;
+    // });
 
     // this.then((elements) => {
     //     // var arrayOfElementFinders = [elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]]; 
@@ -157,33 +226,33 @@ function sort() {
 
     // });
 
-    let f = async(function(elements){
-        var arrayOfElementFinders = [elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]]; 
-        // var arrayOfElementFinders = [elements[0], elements[1], elements[2]]; 
-        // let arrayOfElementFinders = [];
-        // for (let i = 0; i < elements.length; i++) {
-        //     arrayOfElementFinders.push(elements[i]);
-        // }
-        let sortedArray = await(sortTheArray(arrayOfElementFinders));
-        // sortedArray.forEach((el) => {
-        //     el.getText().then((text) => {
-        //         console.log(text);
-        //     });
-        // });
+    // let f = async(function(elements){
+    //     var arrayOfElementFinders = [elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]]; 
+    //     // var arrayOfElementFinders = [elements[0], elements[1], elements[2]]; 
+    //     // let arrayOfElementFinders = [];
+    //     // for (let i = 0; i < elements.length; i++) {
+    //     //     arrayOfElementFinders.push(elements[i]);
+    //     // }
+    //     let sortedArray = await(sortTheArray(arrayOfElementFinders));
+    //     // sortedArray.forEach((el) => {
+    //     //     el.getText().then((text) => {
+    //     //         console.log(text);
+    //     //     });
+    //     // });
 
-        var mock = function (array) {   
-            var webElements = sortedArray.map(function (ef) {
-                return ef.getWebElement();
-            });
-            return protractor.promise.fulfilled(webElements);
-        }
-        let list = new protractor.ElementArrayFinder(this.browser_, mock, this.locator_, this.actionResults_);
-        list.getText().then((texts) => {
-            console.log(texts);
-        });
-    });
+    //     var mock = function (array) {   
+    //         var webElements = sortedArray.map(function (ef) {
+    //             return ef.getWebElement();
+    //         });
+    //         return protractor.promise.fulfilled(webElements);
+    //     }
+    //     let list = new protractor.ElementArrayFinder(this.browser_, mock, this.locator_, this.actionResults_);
+    //     list.getText().then((texts) => {
+    //         console.log(texts);
+    //     });
+    // });
 
-    this.then(f);
+    // this.then(f);
 
     // this.then((elements) => {
     //     var arrayOfElementFinders = [elements[0]]; 

@@ -24,9 +24,12 @@ describe('ElementArrayFinder Tests', function() {
 
     describe('sort', function() {
 
-        it('should sort the elements depending on the given function', function() {
+        it('should sort the elements depending on the given function', function(done) {
             var elementsToSort = element.all(by.className('elementsToSort'));
             elementsToSort.sort();
+            setTimeout(function() {
+                done();
+            }, 20000);
             // expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
         });
 
