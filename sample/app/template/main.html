@@ -3,19 +3,19 @@
 
     <ng-form>
         <div>
-            <label class="elementsToSort" for="username">Username: </label>
+            <label class="elementsToSort" sort-order-attribute="12" for="username">Username: </label>
             <input type="text" id="username" ng-model="username" placeholder="Type your username" />
         </div>
         <br>
         <div>
-            <label class="elementsToSort" for="marital-status">Marital Status: </label>
+            <label class="elementsToSort" for="marital-status" sort-order-attribute="6">Marital Status: </label>
             <select id="marital-status" ng-options="maritalStatusItem for maritalStatusItem in maritalStatusList" ng-model="maritalStatus">
                 <option value="">---Please select---</option>
             </select>
         </div>
         <br>
         <div>
-            <label class="elementsToSort">
+            <label class="elementsToSort" sort-order-attribute="2">
                 Do you have dogs:
                 <input type="checkbox" id="dogs-checkbox" ng-model="dogsCheckbox" ng-true-value="'YES'" ng-false-value="'NO'">
             </label>
@@ -24,12 +24,12 @@
         <div>
             <label>Gender: </label>
             <br>
-            <label class="elementsToSort" for="gender-male">
+            <label class="elementsToSort" for="gender-male" sort-order-attribute="5">
                 <input type="radio" id="gender-male" ng-model="genderRadio" ng-value="'Male'">
                 I am a Male
             </label>
             <br>
-            <label class="elementsToSort" for="gender-female">
+            <label class="elementsToSort" for="gender-female" sort-order-attribute="1">
                 <input type="radio" id="gender-female" ng-model="genderRadio" ng-value="'Female'">
                 I am a Female
             </label>

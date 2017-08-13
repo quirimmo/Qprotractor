@@ -1,6 +1,5 @@
 'use strict';
 
-const mergeSort = require("js-sorting").mergeSort;
 const async = require('asyncawait/async');
 const await = require('asyncawait/await');
 
@@ -88,7 +87,7 @@ function isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed) {
 }
 
 function waitAndThenExecute(maxWaitTime, fnToExecute) {
-    var EC = protractor.ExpectedConditions;
+    let EC = protractor.ExpectedConditions;
     return browser.wait(EC.visibilityOf(this), maxWaitTime)
         .then(fnToExecute.bind(this))
         .catch(onCatchGenericError);
@@ -116,23 +115,17 @@ function getLabelTextOfRadioSelectedItem() {
 }
 
 
-function sort(newSortedElementArrayFinder) {
-    let deferred = protractor.promise.defer();
-    this.then(async(elements => {
-        const comparableArray = await (protractor.promise.all(elements.map(async(x => [await (x.getText()), x]))));
-        comparableArray.sort((a, b) => a[0].localeCompare(b[0]));
-        const sortedArray = comparableArray.map(x => x[1]);
-        newSortedElementArrayFinder.data = protractor.getElementArrayFinderFromArrayOfElementFinder(sortedArray);
-        deferred.fulfill();
-    }));
-    return deferred;
+function sort(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
+    return sortWithElementArrayFinder.call(this, newSortedElementArrayFinder, compareFunction, functionName, inputParams);
 }
+
+
 
 // ===========================================================================================
 
 function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
-    var getWebElements = function() {
-        var webElements = arrayOfElementFinder.map(function(ef) {
+    let getWebElements = function() {
+        let webElements = arrayOfElementFinder.map(function(ef) {
             return ef.getWebElement();
         });
         return protractor.promise.fulfilled(webElements);
@@ -152,4 +145,26 @@ function filterElementByAttributeChecked(el) {
 
 function onCatchGenericError(err) {
     throw new Error(err);
+}
+
+
+
+// ===========================================================================================
+
+
+function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
+    let deferred = protractor.promise.defer();
+    this.then(async(elements => {
+        newSortedElementArrayFinder.data = baseImplementOfSort(elements, compareFunction, functionName, inputParams);
+        deferred.fulfill();
+    }));
+    return deferred;
+}
+
+
+function baseImplementOfSort(elements, compareFunction, functionName, inputParams) {
+    const comparableArray = await (protractor.promise.all(elements.map(async(x => [await (x[functionName].apply(x, inputParams)), x]))));
+    comparableArray.sort(compareFunction);
+    const sortedArray = comparableArray.map(x => x[1]);
+    return protractor.getElementArrayFinderFromArrayOfElementFinder(sortedArray);
 }
