@@ -7,7 +7,7 @@ describe('ElementArrayFinder Tests', function() {
     describe('getValueOfRadioSelectedItem', function() {
 
         it('should get the value of the selected item in a radio', function() {
-            var genderRadios = element.all(by.model('genderRadio'));
+            let genderRadios = element.all(by.model('genderRadio'));
             expect(genderRadios.getValueOfRadioSelectedItem()).toEqual('Male');
         });
 
@@ -16,7 +16,7 @@ describe('ElementArrayFinder Tests', function() {
     describe('getLabelTextOfRadioSelectedItem', function() {
 
         it('should get the value of the label associated to the selected item in a radio', function() {
-            var genderRadios = element.all(by.model('genderRadio'));
+            let genderRadios = element.all(by.model('genderRadio'));
             expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
         });
 
@@ -24,13 +24,14 @@ describe('ElementArrayFinder Tests', function() {
 
     describe('sort', function() {
 
-        it('should sort the elements depending on the given function', function(done) {
+        it('should sort the elements depending on the given function', function() {
             var elementsToSort = element.all(by.className('elementsToSort'));
-            elementsToSort.sort();
-            setTimeout(function() {
-                done();
-            }, 20000);
-            // expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
+            let newSortedElements = {};
+            elementsToSort.sort(newSortedElements).then(el => {
+                newSortedElements.data.getText().then(texts => {
+                    console.log(texts);
+                });
+            });
         });
 
     });

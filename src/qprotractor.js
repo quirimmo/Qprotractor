@@ -21,6 +21,7 @@ protractor.ElementArrayFinder.prototype.sort = sort;
 
 
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
+protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinderFromArrayOfElementFinder;
 
 // ===========================================================================================
 
@@ -115,164 +116,29 @@ function getLabelTextOfRadioSelectedItem() {
 }
 
 
-function sort() {
-
-    let promises = [];
-
-    var reverseCompare = function(a, b) {
-        let deferred = protractor.promise.defer();
-        promises.push(deferred);
-        let listPromises = [a.getText(), b.getText()];
-        protractor.promise.all(listPromises)
-            .then((values) => {
-                setTimeout(function() {
-                    deferred.fulfill();
-                }, 1000);
-                return values[0] - values[1];
-            });
-    };
-
-    var sortTheArray = function(arrayOfElementFinders) {
-        let res = mergeSort(arrayOfElementFinders, reverseCompare);
-        return res;
-    };
-
-    this.then((elements) => {
-        var arrayOfElementFinders = [elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]]; 
-        // var arrayOfElementFinders = [elements[0], elements[1], elements[2]]; 
-        // let arrayOfElementFinders = [];
-        // for (let i = 0; i < elements.length; i++) {
-        //     arrayOfElementFinders.push(elements[i]);
-        // }
-        let sortedArray = sortTheArray(arrayOfElementFinders);
-        // sortedArray.forEach((el) => {
-        //     el.getText().then((text) => {
-        //         console.log(text);
-        //     });
-        // });
-        setTimeout(function() {
-            // protractor.promise.all(promises)
-            // .then(() => {
-            //     sortedArray.forEach((el) => {
-            //         el.getText().then((text) => {
-            //             console.log(text);
-            //         });
-            //     });
-            // });
-            sortedArray.forEach((el) => {
-                el.getText().then((text) => {
-                    console.log(text);
-                });
-            });
-        }, 10000);
-        
-
-        // var mock = function (array) {   
-        //     var webElements = sortedArray.map(function (ef) {
-        //         return ef.getWebElement();
-        //     });
-        //     return protractor.promise.fulfilled(webElements);
-        // }
-        // let list = new protractor.ElementArrayFinder(this.browser_, mock, this.locator_, this.actionResults_);
-        // list.getText().then((texts) => {
-        //     console.log(texts);
-        // });
-
-    });
-
-    // var reverseCompare = async(function (a, b) {
-    //     let listPromises = [a.getText(), b.getText()];
-    //     await(protractor.promise.all(listPromises).then((values) => {
-    //         return values[0] - values[1];
-    //     }));
-    // });
-
-    // var reverseCompare = async(function (a, b) {
-    //     let listPromises = [a.getText(), b.getText()];
-    //     await(protractor.promise.all(listPromises).then((values) => {
-    //         return values[0] - values[1];
-    //     }));
-    // });
-
-    // var sortTheArray = async(function (arrayOfElementFinders) {
-    //     let res = await(mergeSort(arrayOfElementFinders, reverseCompare)); 
-    //     return res;
-    // });
-
-    // this.then((elements) => {
-    //     // var arrayOfElementFinders = [elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]]; 
-    //     // // var arrayOfElementFinders = [elements[0], elements[1], elements[2]]; 
-    //     // // let arrayOfElementFinders = [];
-    //     // // for (let i = 0; i < elements.length; i++) {
-    //     // //     arrayOfElementFinders.push(elements[i]);
-    //     // // }
-    //     // let sortedArray = sortTheArray(arrayOfElementFinders);
-    //     // // sortedArray.forEach((el) => {
-    //     // //     el.getText().then((text) => {
-    //     // //         console.log(text);
-    //     // //     });
-    //     // // });
-
-    //     // var mock = function (array) {   
-    //     //     var webElements = sortedArray.map(function (ef) {
-    //     //         return ef.getWebElement();
-    //     //     });
-    //     //     return protractor.promise.fulfilled(webElements);
-    //     // }
-    //     // let list = new protractor.ElementArrayFinder(this.browser_, mock, this.locator_, this.actionResults_);
-    //     // list.getText().then((texts) => {
-    //     //     console.log(texts);
-    //     // });
-
-    // });
-
-    // let f = async(function(elements){
-    //     var arrayOfElementFinders = [elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]]; 
-    //     // var arrayOfElementFinders = [elements[0], elements[1], elements[2]]; 
-    //     // let arrayOfElementFinders = [];
-    //     // for (let i = 0; i < elements.length; i++) {
-    //     //     arrayOfElementFinders.push(elements[i]);
-    //     // }
-    //     let sortedArray = await(sortTheArray(arrayOfElementFinders));
-    //     // sortedArray.forEach((el) => {
-    //     //     el.getText().then((text) => {
-    //     //         console.log(text);
-    //     //     });
-    //     // });
-
-    //     var mock = function (array) {   
-    //         var webElements = sortedArray.map(function (ef) {
-    //             return ef.getWebElement();
-    //         });
-    //         return protractor.promise.fulfilled(webElements);
-    //     }
-    //     let list = new protractor.ElementArrayFinder(this.browser_, mock, this.locator_, this.actionResults_);
-    //     list.getText().then((texts) => {
-    //         console.log(texts);
-    //     });
-    // });
-
-    // this.then(f);
-
-    // this.then((elements) => {
-    //     var arrayOfElementFinders = [elements[0]]; 
-
-    //     var mock = function (array) {   
-    //         var webElements = arrayOfElementFinders.map(function (ef) {
-    //             return ef.getWebElement();
-    //         });
-    //         return protractor.promise.fulfilled(webElements);
-    //     }
-    //     let list = new protractor.ElementArrayFinder(this.browser_, mock, this.locator_, this.actionResults_);
-    //     // let list = new protractor.ElementArrayFinder(protractor, mock);
-    //     list.getText().then((texts) => {
-    //         console.log(texts);
-    //     });
-    // });
-
+function sort(newSortedElementArrayFinder) {
+    let deferred = protractor.promise.defer();
+    this.then(async(elements => {
+        const comparableArray = await (protractor.promise.all(elements.map(async(x => [await (x.getText()), x]))));
+        comparableArray.sort((a, b) => a[0].localeCompare(b[0]));
+        const sortedArray = comparableArray.map(x => x[1]);
+        newSortedElementArrayFinder.data = protractor.getElementArrayFinderFromArrayOfElementFinder(sortedArray);
+        deferred.fulfill();
+    }));
+    return deferred;
 }
 
 // ===========================================================================================
+
+function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
+    var getWebElements = function() {
+        var webElements = arrayOfElementFinder.map(function(ef) {
+            return ef.getWebElement();
+        });
+        return protractor.promise.fulfilled(webElements);
+    };
+    return new protractor.ElementArrayFinder(this.browser_, getWebElements, this.locator_, this.actionResults_);
+}
 
 function filterElementByAttributeChecked(el) {
     return el.getCheckedValue()
