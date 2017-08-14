@@ -1,8 +1,8 @@
 'use strict';
 
-// requiring async/await i
-const async = require('asyncawait/async');
-const await = require('asyncawait/await');
+// requiring async/await for node versions <= 6
+const asyncPlugin = require('asyncawait/async');
+const awaitPlugin = require('asyncawait/await');
 
 protractor.ElementFinder.prototype.getInputValue = getInputValue;
 protractor.ElementFinder.prototype.setInputValue = setInputValue;
@@ -252,7 +252,7 @@ function clickFirstElement(elements) {
 
 function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
     let deferred = protractor.promise.defer();
-    this.then(async(elements => {
+    this.then(asyncPlugin(elements => {
         newSortedElementArrayFinder.data = baseImplementOfSort(elements, compareFunction, functionName, inputParams);
         deferred.fulfill();
     }));
@@ -260,7 +260,7 @@ function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction
 }
 
 function baseImplementOfSort(elements, compareFunction, functionName, inputParams) {
-    const comparableArray = await (protractor.promise.all(elements.map(async(x => [await (x[functionName].apply(x, inputParams)), x]))));
+    const comparableArray = awaitPlugin (protractor.promise.all(elements.map(asyncPlugin(x => [awaitPlugin (x[functionName].apply(x, inputParams)), x]))));
     comparableArray.sort(compareFunction);
     const sortedArray = comparableArray.map(x => x[1]);
     return protractor.getElementArrayFinderFromArrayOfElementFinder(sortedArray);

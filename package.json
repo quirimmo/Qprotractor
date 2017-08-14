@@ -24,6 +24,7 @@
     "thenable": "^1.0.0"
   },
   "devDependencies": {
+    "jsdoc-to-markdown": "^3.0.0",
     "lite-server": "^2.3.0",
     "protractor": "^5.1.2"
   },
