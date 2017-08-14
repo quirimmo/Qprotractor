@@ -34,4 +34,16 @@ describe('Base Protractor Tests', function() {
 
     });
 
+    describe('setSelectValueByOptionText', function() {
+
+        it('should select an option in a select element through the option text', function() {
+            let select = element(by.id('marital-status'));
+            expect(select.getSelectCheckedOption()).toEqual('Single');
+            protractor.setSelectValueByOptionText('Engaged', select).then(
+                expect(select.getSelectCheckedOption()).toEqual('Engaged')
+            );
+        });
+
+    });
+
 });

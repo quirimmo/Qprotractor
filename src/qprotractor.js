@@ -24,6 +24,7 @@ protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
 protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinderFromArrayOfElementFinder;
 protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
 protractor.setRadioButtonValueByLabelText = setRadioButtonValueByLabelText;
+protractor.setSelectValueByOptionText = setSelectValueByOptionText;
 
 
 // ===========================================================================================
@@ -164,6 +165,14 @@ function setRadioButtonValueByLabelText(labelText, elementContainer) {
     var el = elementContainer || element;
     return el.all(by.tagName('label'))
         .filter(filterElementByText.bind(null, labelText))
+        .then(clickFirstElement)
+        .catch(onCatchGenericError);
+}
+
+function setSelectValueByOptionText(optionText, elementContainer) {
+    var el = elementContainer || element;
+    return el.all(by.tagName('option'))
+        .filter(filterElementByText.bind(null, optionText))
         .then(clickFirstElement)
         .catch(onCatchGenericError);
 }
