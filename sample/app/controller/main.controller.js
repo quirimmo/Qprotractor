@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('myApp')
-.controller('MainController', ['$scope', function($scope) {
+angular.module('myApp').controller('MainController', ['$scope', function($scope) {
 
     $scope.username = 'Username Value';
 
@@ -18,7 +17,28 @@ angular.module('myApp')
     $scope.hiddenField = 'Hidden field';
 
     $scope.liveInMyCountry = undefined;
-    
-    $scope.tickByContainer = undefined; 
+
+    $scope.tickByContainer = undefined;
+
+    $scope.tableData = [
+        {
+            firstName: 'Tony',
+            lastName: 'Stark',
+            age: 40,
+            heroName: 'Iron Man'
+        },
+        {
+            firstName: 'Peter',
+            lastName: 'Parker',
+            age: 25,
+            heroName: 'Spiderman'
+        },
+        {
+            firstName: 'Bruce',
+            lastName: 'Wayne',
+            age: 35,
+            heroName: 'Batman'
+        }
+    ];
 
 }]);

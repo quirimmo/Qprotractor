@@ -17,7 +17,9 @@ protractor.ElementFinder.prototype.clickOnParent = clickOnParent;
 
 protractor.ElementArrayFinder.prototype.getValueOfRadioSelectedItem = getValueOfRadioSelectedItem;
 protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLabelTextOfRadioSelectedItem;
+protractor.ElementArrayFinder.prototype.getLabelTextOfRadioCheckedOption = getLabelTextOfRadioCheckedOption;
 protractor.ElementArrayFinder.prototype.sort = sort;
+protractor.ElementArrayFinder.prototype.getTableRowsFromCSSColumnsValues = getTableRowsFromCSSColumnsValues;
 
 
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
@@ -104,6 +106,32 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
 
 // ===========================================================================================
 
+function getLabelTextOfRadioCheckedOption() {
+    return this.filter(filterCheckedOption)
+        .then(onFilteringRadios)
+        .catch(protractor.onCatchGenericError);
+ 
+    function filterCheckedOption(elm) {
+        return elm.getCheckedValue()
+            .then(onSuccess)
+            .catch(protractor.onCatchGenericError);
+ 
+        function onSuccess(isChecked) {
+            return isChecked;
+        }
+    }
+ 
+    function onFilteringRadios(filteredResults) {
+        return filteredResults[0].getIdValue()
+            .then(selectRadioLabel)
+            .catch(protractor.onCatchGenericError);
+ 
+        function selectRadioLabel(idValue) {
+            return element(by.css('label[for="' + idValue + '"]')).getText();
+        }
+    }
+}
+
 function getValueOfRadioSelectedItem() {
     return this.filter(filterElementByAttributeChecked)
         .then((els) => {
@@ -122,6 +150,16 @@ function getLabelTextOfRadioSelectedItem() {
         .catch(onCatchGenericError);
 }
 
+function getTableRowsFromCSSColumnsValues(columnClassesArray) {
+    let promises;
+    return this.map(function (tr) {
+        promises = [];
+        columnClassesArray.forEach(function (columnClass) {
+            promises.push(tr.element(by.className(columnClass)).getText());
+        });
+        return promises;
+    });
+}
 
 function sort(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
     return sortWithElementArrayFinder.call(this, newSortedElementArrayFinder, compareFunction, functionName, inputParams);
@@ -204,7 +242,6 @@ function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction
     }));
     return deferred;
 }
-
 
 function baseImplementOfSort(elements, compareFunction, functionName, inputParams) {
     const comparableArray = await (protractor.promise.all(elements.map(async(x => [await (x[functionName].apply(x, inputParams)), x]))));

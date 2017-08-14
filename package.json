@@ -20,7 +20,8 @@
   "dependencies": {
     "angular": "^1.6.4",
     "angular-ui-router": "^1.0.3",
-    "asyncawait": "^1.0.6"
+    "asyncawait": "^1.0.6",
+    "thenable": "^1.0.0"
   },
   "devDependencies": {
     "lite-server": "^2.3.0",

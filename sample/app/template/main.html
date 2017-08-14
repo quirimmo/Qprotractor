@@ -56,6 +56,27 @@
         <div>
             Tick by container: <input type="radio" id="tick-by-container" ng-model="tickByContainer" ng-value="'YES'">
         </div>
+        <br>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Age</td>
+                        <td>Hero Name</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in tableData">
+                        <td class="table-first-name">{{data.firstName}}</td>
+                        <td class="table-last-name">{{data.lastName}}</td>
+                        <td class="table-age">{{data.age}}</td>
+                        <td class="table-hero-name">{{data.heroName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </ng-form>
 
 </div>

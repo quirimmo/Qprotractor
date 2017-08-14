@@ -61,4 +61,26 @@ describe('ElementArrayFinder Tests', function() {
 
     });
 
+    describe('getLabelTextOfRadioCheckedOption', function() {
+
+        it('should return the text of the label associated to the selected radio input', function() {
+            let genderRadios = element.all(by.model('genderRadio'));
+            expect(genderRadios.getLabelTextOfRadioCheckedOption()).toEqual('I am a Male');
+        });
+
+    });
+
+    describe('getTableRowsFromCSSColumnsValues', function() {
+
+        it('should return the rows values of a table associated to the provided css class names of the columns', function() {
+            let tableRows = element.all(by.repeater('data in tableData'));
+            expect(tableRows.getTableRowsFromCSSColumnsValues(['table-first-name', 'table-last-name', 'table-age', 'table-hero-name'])).toEqual([
+                ['Tony', 'Stark', '40', 'Iron Man'],
+                ['Peter', 'Parker', '25', 'Spiderman'],
+                ['Bruce', 'Wayne', '35', 'Batman']
+            ]);
+        });
+
+    });
+
 });
