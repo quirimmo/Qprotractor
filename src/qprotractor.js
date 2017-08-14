@@ -1,5 +1,6 @@
 'use strict';
 
+// requiring async/await i
 const async = require('asyncawait/async');
 const await = require('asyncawait/await');
 
@@ -31,14 +32,29 @@ protractor.setSelectValueByOptionText = setSelectValueByOptionText;
 
 // ===========================================================================================
 
+
+/**
+ * Click on the parent of the current ElementFinder through it's property parentElementArrayFinder included in it
+ * @returns {protractor.promise} A promise which will be resolved after the click on the element happens
+ */
 function clickOnParent() {
     return this.parentElementArrayFinder.click();
 }
 
+/**
+ * Get the value of the current ElementFinder .
+ * For simple input types (like text, number, etc...) it will return directly the value
+ * For complex types (like select, radio, etc...) it will return a composite value. See the explicit methods for these elements
+ * @returns {protractor.promise} A promise which holds the value of the input
+ */
 function getInputValue() {
     return this.getAttribute('value');
 }
 
+/**
+ * Get the id of the current ElementFinder
+ * @returns {protractor.promise} A promise which holds the id of the input
+ */
 function getIdValue() {
     return this.getAttribute('id');
 }
