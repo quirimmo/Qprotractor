@@ -230,6 +230,11 @@ function getLabelTextByForAttribute(forValue) {
 }
 
 
+/**
+ * Get an ElementArrayFinder from an array of ElementFinder items
+ * @param {array} arrayOfElementFinder: An array of ElementFinder items you want to convert into an ElementArrayFinder item 
+ * @returns {protractor.ElementArrayFinder} The ElementArrayFinder associated to the given array of ElementFinder items
+ */
 function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
     let getWebElements = function() {
         let webElements = arrayOfElementFinder.map(function(ef) {
@@ -240,6 +245,12 @@ function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
     return new protractor.ElementArrayFinder(this.browser_, getWebElements, this.locator_, this.actionResults_);
 }
 
+
+/**
+ * Filter an ElementFinder provided as input through its checked value 
+ * @param {protractor.ElementFinder} el: The input ElementFinder to be filter by its checked value 
+ * @returns {protractor.promise}: A promise returned when the checked value has been retrieved. Rejected if some error occurs
+ */
 function filterElementByAttributeChecked(el) {
     return el.getCheckedValue()
         .then(checkCheckedValue)
@@ -250,11 +261,21 @@ function filterElementByAttributeChecked(el) {
     }
 }
 
+
+/**
+ * Throw a given error
+ * @param {Error} err: Error to be thrown
+ */
 function onCatchGenericError(err) {
     throw new Error(err);
 }
 
 
+/**
+ * Set the value of a radio button clicking on the label associated to it through the HTML for attribute 
+ * @param {string} labelFor: The value of the for attribute that will be used to look for the label element 
+ * @returns {protractor.promise} A promise resolved when the label associated to the radio button will be clicked
+ */
 function setRadioButtonValueByLabelFor(labelFor) {
     return element(by.css(`label[for="${labelFor}"]`)).click();
 }
@@ -276,6 +297,9 @@ function setSelectValueByOptionText(optionText, elementContainer) {
         .catch(onCatchGenericError);
 }
 
+
+
+// internal methods
 // ===========================================================================================
 
 function filterElementByText(textToFind, element) {
