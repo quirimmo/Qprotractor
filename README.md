@@ -15,3 +15,7 @@ doxdox for generation of documentation from jsdoc
 | name                   | params           |
 |------------------------|------------------|
 | dasjdklasjdklsjadlksja | dasldjaslkdsjalk |
+
+
+doxdox 'src/qprotractor.js' --layout bootstrap --output index.html
+doxdox 'src/qprotractor.js' --layout markdown --output DOCUMENTATION.md
