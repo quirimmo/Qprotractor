@@ -4,35 +4,48 @@ const minify = require('gulp-minify');
 const gls = require('gulp-live-server');
 
 
+const PATH = {
+    components: './sample/app/components',
+    dist: './dist',
+    app: './sample/app/',
+    src: './src/qprotractor.js'
+};
+const APP_FILES_TO_WATCH = 'sample/app/**/*.*';
+const APP_COMPONENTS = [
+    './node_modules/angular/angular.min.js', 
+    './node_modules/angular-ui-router/release/angular-ui-router.min.js'
+];
+
+
 gulp.task('clean-dist', function() {
-    return gulp.src('./dist', { read: false }).pipe(clean());
+    return gulp.src(PATH.dist, { read: false }).pipe(clean());
 });
 
 gulp.task('clean-app-components', function() {
-    return gulp.src('./sample/app/components', { read: false }).pipe(clean());
+    return gulp.src(PATH.components, { read: false }).pipe(clean());
 });
 
 gulp.task('publish', ['clean-dist'], function() {
     gulp
-        .src('./src/qprotractor.js')
+        .src(PATH.src)
         .pipe(minify({
             ext: {
                 min: '.min.js'
             }
         }))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(PATH.dist));
 });
 
 gulp.task('serve-demo-app', function() {
-    let server = gls.static('./sample/app/', 9000);
+    let server = gls.static(PATH.app, 9000);
     server.start();
-    gulp.watch('sample/app/**/*.*', function(file) {
+    gulp.watch(APP_FILES_TO_WATCH, function(file) {
         server.notify.apply(server, [file]);
     });
 });
 
 gulp.task('copy-app-components', ['clean-app-components'], function() {
     gulp
-        .src(['./node_modules/angular/angular.min.js', './node_modules/angular-ui-router/release/angular-ui-router.min.js'])
-        .pipe(gulp.dest('./sample/app/components'));
+        .src(APP_COMPONENTS)
+        .pipe(gulp.dest(PATH.components));
 });
