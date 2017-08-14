@@ -8,3 +8,10 @@ webdriver-manager start --versions.chrome 2.24
 lite-server for running app
 
 http://localhost:3000/sample/app/index.html#!/main
+
+doxdox for generation of documentation from jsdoc
+
+
+| name                   | params           |
+|------------------------|------------------|
+| dasjdklasjdklsjadlksja | dasldjaslkdsjalk |

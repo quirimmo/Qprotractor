@@ -13,15 +13,6 @@ describe('ElementArrayFinder Tests', function() {
 
     });
 
-    describe('getLabelTextOfRadioSelectedItem', function() {
-
-        it('should get the value of the label associated to the selected item in a radio', function() {
-            let genderRadios = element.all(by.model('genderRadio'));
-            expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
-        });
-
-    });
-
     describe('sort', function() {
 
         it('should sort the elements on alphabetically order of their texts, assigning the returning ElementArrayFinder to the input parameter object at the data property', function() {
@@ -61,11 +52,11 @@ describe('ElementArrayFinder Tests', function() {
 
     });
 
-    describe('getLabelTextOfRadioCheckedOption', function() {
-
-        it('should return the text of the label associated to the selected radio input', function() {
+    describe('getLabelTextOfRadioSelectedItem', function() {
+        
+        it('should get the value of the label associated to the selected item in a radio', function() {
             let genderRadios = element.all(by.model('genderRadio'));
-            expect(genderRadios.getLabelTextOfRadioCheckedOption()).toEqual('I am a Male');
+            expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
         });
 
     });
