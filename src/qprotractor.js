@@ -78,7 +78,7 @@ function getCheckedValue() {
 
 /**
  * Set the provided value to an input ElementFinder. It doesn't clear the previous value so this will be appended at the end of the previous one
- * @param {string} value: The value to set in the input ElementFinder 
+ * @param {string} value The value to set in the input ElementFinder 
  * @returns {protractor.promise} A promise resolved when the value will be set in the input ElementFinder
  */
 function setInputValue(value) {
@@ -87,7 +87,7 @@ function setInputValue(value) {
 
 /**
  * Clear the actual value of an input ElementFinder and then it sets the provided value to it
- * @param {string} value: The value to set in the input ElementFinder 
+ * @param {string} value The value to set in the input ElementFinder 
  * @returns {protractor.promise} A promise resolved when the input ElementFinder will be clear and the value will be set in it
  */
 function clearAndSetInputValue(value) {
@@ -102,7 +102,7 @@ function clearAndSetInputValue(value) {
 
 /**
  * Set a new value on an input ElementFinder if it is enabled, otherwise proceed without setting the value
- * @param {value} value: The new value to set in the ElementFinder if it is enabled  
+ * @param {value} value The new value to set in the ElementFinder if it is enabled  
  * @returns {protractor.promise} A promise resolved when the input ElementFinder will be clear and the new value will be set in, if it is enabled. Otherwise it will be fulfilled if the ElementFinder is not enabled.
  */
 function setValueIfEnabledOrProceed(value) {
@@ -120,7 +120,7 @@ function setValueIfEnabledOrProceed(value) {
 
 /**
  * Check if an ElementFinder is enabled whether is displayed, otherwise returns the provided value (true by default) 
- * @param {boolean} isEnabledIfNotDisplayed: The default value to be returned if the ElementFinder is not displayed 
+ * @param {boolean} isEnabledIfNotDisplayed The default value to be returned if the ElementFinder is not displayed 
  * @returns {protractor.promise} A promise which holds the isEnabled value if the ElementFinder is present, otherwise the provided isEnabledIfNotDisplayed or true by default 
  */
 function isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed) {
@@ -139,8 +139,8 @@ function isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed) {
 
 /**
  * Wait for an ElementFinder to be present in a given delay, and if present then execute the provided function, otherwise reject with an error
- * @param {number} maxWaitTime: The maximum time to wait for the ElementFinder presence 
- * @param {Function} fnToExecute: The function to be executed if the ElementFinder is present in the given delay  
+ * @param {number} maxWaitTime The maximum time to wait for the ElementFinder presence 
+ * @param {Function} fnToExecute The function to be executed if the ElementFinder is present in the given delay  
  * @returns {protractor.promise} A promise rejected if the element is not present in the provided time, otherwise it holds the value returned by the provided function to call 
  */
 function waitAndThenExecute(maxWaitTime, fnToExecute) {
@@ -187,7 +187,7 @@ function getLabelTextOfRadioSelectedItem() {
 /**
  * Get the text of all the rows of the table but associated only to the columns identified by the css classes provided as input array.
  * Called on the ElementArrayFinder which holds all the tr of the table.  
- * @param {array} columnClassesArray: An array with all the css classes of the table columns you want to retrieve the text for  
+ * @param {array} columnClassesArray An array with all the css classes of the table columns you want to retrieve the text for  
  * @returns {protractor.promise} A promise which holds an array of arrays where the inner arrays represent the row texts of the table associated to the given columns
  */
 function getTableRowsFromCSSColumnsValues(columnClassesArray) {
@@ -204,10 +204,10 @@ function getTableRowsFromCSSColumnsValues(columnClassesArray) {
 
 /**
  * Sort an ElementArrayFinder using a given compareFunction executed over the values returned by the application of the functionName with the inputParams over the ElementFinder items which compose the ElementArrayFinder
- * @param {Object} newSortedElementArrayFinder: An object parameter which will hold inside the data property the sorted ElementArrayFinder 
- * @param {Function} compareFunction: Function to be used for comparing elements inside the ElementArrayFinder 
- * @param {string} functionName: Name of the function to be called on the ElementFinder items which compose the ElementArrayFinder. Should be a valid function of ElementFinder 
- * @param {array} inputParams: An array of input parameters to be passed in the functionName called on the single ElementFinder items of the ElementArrayFinder 
+ * @param {Object} newSortedElementArrayFinder An object which will hold inside the data property the new sorted ElementArrayFinder 
+ * @param {Function} compareFunction Function to be used for comparing elements inside the ElementArrayFinder 
+ * @param {string} functionName Name of the function to be called on the ElementFinder items which compose the ElementArrayFinder. Should be a valid function of ElementFinder 
+ * @param {array} inputParams An array of input parameters to be passed in the functionName called on the single ElementFinder items of the ElementArrayFinder 
  * @returns {protractor.promise} A promise resolved when the ElementArrayFinder will be sorted. Then the sorted ElementArrayFinder will be available in newSortedElementArrayFinder.data. Rejected if some error occurs
  */
 function sort(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
@@ -222,7 +222,7 @@ function sort(newSortedElementArrayFinder, compareFunction, functionName, inputP
 
 /**
  * Get the text of the label with the for attribute equals to the provided forValue
- * @param {string} forValue: The value of the for of the label 
+ * @param {string} forValue The value of the for of the label 
  * @returns {protractor.promise} A promise resolved which holds the text value of the label
  */
 function getLabelTextByForAttribute(forValue) {
@@ -232,7 +232,7 @@ function getLabelTextByForAttribute(forValue) {
 
 /**
  * Get an ElementArrayFinder from an array of ElementFinder items
- * @param {array} arrayOfElementFinder: An array of ElementFinder items you want to convert into an ElementArrayFinder item 
+ * @param {array} arrayOfElementFinder An array of ElementFinder items you want to convert into an ElementArrayFinder item 
  * @returns {protractor.ElementArrayFinder} The ElementArrayFinder associated to the given array of ElementFinder items
  */
 function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
@@ -248,8 +248,8 @@ function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
 
 /**
  * Filter an ElementFinder provided as input through its checked value 
- * @param {protractor.ElementFinder} el: The input ElementFinder to be filter by its checked value 
- * @returns {protractor.promise}: A promise returned when the checked value has been retrieved. Rejected if some error occurs
+ * @param {protractor.ElementFinder} el The input ElementFinder to be filter by its checked value 
+ * @returns {protractor.promise} A promise returned when the checked value has been retrieved. Rejected if some error occurs
  */
 function filterElementByAttributeChecked(el) {
     return el.getCheckedValue()
@@ -264,7 +264,7 @@ function filterElementByAttributeChecked(el) {
 
 /**
  * Throw a given error
- * @param {Error} err: Error to be thrown
+ * @param {Error} err Error to be thrown
  */
 function onCatchGenericError(err) {
     throw new Error(err);
@@ -273,7 +273,7 @@ function onCatchGenericError(err) {
 
 /**
  * Set the value of a radio button clicking on the label associated to it through the HTML for attribute 
- * @param {string} labelFor: The value of the for attribute that will be used to look for the label element 
+ * @param {string} labelFor The value of the for attribute that will be used to look for the label element 
  * @returns {protractor.promise} A promise resolved when the label associated to the radio button will be clicked
  */
 function setRadioButtonValueByLabelFor(labelFor) {
@@ -281,6 +281,12 @@ function setRadioButtonValueByLabelFor(labelFor) {
 }
 
 
+/**
+ * Set the radio button value from the given labelText associated to it. 
+ * @param {string} labelText The text of the label associated to the radio button you want to select 
+ * @param {ElementFinder} [elementContainer] Optional. The ElementFinder where to find the label. Otherwise it will find inside all the DOM.  
+ * @returns {protractor.promise} A promise resolved when the label associated to the radio button will be clicked. Rejected if some error occurs.
+ */
 function setRadioButtonValueByLabelText(labelText, elementContainer) {
     var el = elementContainer || element;
     return el.all(by.tagName('label'))
@@ -289,6 +295,13 @@ function setRadioButtonValueByLabelText(labelText, elementContainer) {
         .catch(onCatchGenericError);
 }
 
+
+/**
+ * Select an option from a select depending on the provided optionText 
+ * @param {string} optionText The text of the option want to select 
+ * @param {ElementFinder} [elementContainer] Optional. The ElementFinder where to find the option. Otherwise it will find inside all the DOM
+ * @returns {protractor.promise} A promise resolved when the option of the select has been selected. Rejected if some error occurs
+ */
 function setSelectValueByOptionText(optionText, elementContainer) {
     var el = elementContainer || element;
     return el.all(by.tagName('option'))
@@ -299,9 +312,16 @@ function setSelectValueByOptionText(optionText, elementContainer) {
 
 
 
-// internal methods
+// Internal methods
 // ===========================================================================================
 
+
+/**
+ * Get the result of the comparison between the given textToFind and the text of the given ElementFinder element  
+ * @param {string} textToFind The text to use for the comparison with the 
+ * @param {ElementFinder} element The element you want to check the text for 
+ * @returns {protractor.promise} A promise which holds the check of the current element text with the given textToFind. Rejected if some error occurs 
+ */
 function filterElementByText(textToFind, element) {
     return element.getText()
             .then(checkText)
@@ -312,6 +332,13 @@ function filterElementByText(textToFind, element) {
     }
 }
 
+
+/**
+ * Click on the first element of the given array elements of ElementFinder items. 
+ * If the array has not items, it throws an error
+ * @param {array} elements Array of ElementFinder items  
+ * @returns {protractor.promise} A promise resolved when the element will be clicked. Throw an error if there are no elements provided
+ */
 function clickFirstElement(elements) {
     if (!elements.length) {
         throw new Error('There are no elements in the given elements collection');
@@ -319,6 +346,15 @@ function clickFirstElement(elements) {
     return elements[0].click();
 }
 
+
+/**
+ * Resolve the calling ElementArrayFinder and call the sort over it providing the parameters, assign the returning sorted ElementArrayFinder to the data property of the input newSortedElementArrayFinder
+ * @param {Object} newSortedElementArrayFinder An object which will hold inside the data property the new sorted ElementArrayFinder
+ * @param {Function} compareFunction A comparable function which will be used to sort the ElementFinder items of the ElementArrayFinder
+ * @param {string} functionName String of a function to be called over all the ElementFinder items retrieved from the calling ElementArryFinder. This function produces the values to be compared to the compareFunction
+ * @param {array} inputParams Array of input parameters to be applied to the given functionName when called
+ * @returns {protractor.promise} A promise resolved when the new sorted ElementArrayFinder will be assigned to the data property of the input newSortedElementArrayFinder
+ */
 function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
     let deferred = protractor.promise.defer();
     this.then(asyncPlugin(elements => {
@@ -328,6 +364,15 @@ function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction
     return deferred;
 }
 
+
+/**
+ * Sort the provided array of ElementFinder and return a new ElementArrayFinder which includes all the sorted elements
+ * @param {array} elements Array of ElementFinder to be sorted 
+ * @param {Function} compareFunction A comparable function used for sorting the provided elements 
+ * @param {string} functionName String of a function to be called over all the ElementFinder items retrieved from the calling ElementArryFinder. This function produces the values to be compared to the compareFunction
+ * @param {array} inputParams Array of input parameters to be applied to the given functionName when called
+ * @returns {ElementArrayFinder} The new sorted ElementArrayFinder
+ */
 function baseImplementOfSort(elements, compareFunction, functionName, inputParams) {
     const comparableArray = awaitPlugin (protractor.promise.all(elements.map(asyncPlugin(x => [awaitPlugin (x[functionName].apply(x, inputParams)), x]))));
     comparableArray.sort(compareFunction);
