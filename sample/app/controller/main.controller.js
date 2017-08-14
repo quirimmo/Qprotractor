@@ -17,4 +17,8 @@ angular.module('myApp')
 
     $scope.hiddenField = 'Hidden field';
 
+    $scope.liveInMyCountry = undefined;
+    
+    $scope.tickByContainer = undefined; 
+
 }]);

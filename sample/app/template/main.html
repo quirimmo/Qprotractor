@@ -1,6 +1,5 @@
 <div>
-    <h1>I am the main template!</h1>
-
+    <h3>I am the main template!</h3>
     <ng-form>
         <div>
             <label class="elementsToSort" sort-order-attribute="12" for="username">Username: </label>
@@ -47,6 +46,16 @@
             <input type="text" id="hidden-field" ng-model="hiddenField" ng-hide="true">
         </div>
         <br>
+        <div id="where-you-live-container">
+            <label for="live-in-my-country">I live in my country: </label>
+            <input type="radio" id="live-in-my-country" ng-model="liveInMyCountry" ng-value="'YES'">
+            <label for="live-abroad">I live abroad: </label>
+            <input type="radio" id="live-abroad" ng-model="liveInMyCountry" ng-value="'NO'">
+        </div>
+        <br>
+        <div>
+            Tick by container: <input type="radio" id="tick-by-container" ng-model="tickByContainer" ng-value="'YES'">
+        </div>
     </ng-form>
 
 </div>

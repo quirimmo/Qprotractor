@@ -12,6 +12,7 @@ protractor.ElementFinder.prototype.getCheckedValue = getCheckedValue;
 protractor.ElementFinder.prototype.setValueIfEnabledOrProceed = setValueIfEnabledOrProceed;
 protractor.ElementFinder.prototype.isEnabledIfDisplayedOrProceed = isEnabledIfDisplayedOrProceed;
 protractor.ElementFinder.prototype.waitAndThenExecute = waitAndThenExecute;
+protractor.ElementFinder.prototype.clickOnParent = clickOnParent;
 
 
 protractor.ElementArrayFinder.prototype.getValueOfRadioSelectedItem = getValueOfRadioSelectedItem;
@@ -21,9 +22,15 @@ protractor.ElementArrayFinder.prototype.sort = sort;
 
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
 protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinderFromArrayOfElementFinder;
+protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
+protractor.setRadioButtonValueByLabelText = setRadioButtonValueByLabelText;
+
 
 // ===========================================================================================
 
+function clickOnParent() {
+    return this.parentElementArrayFinder.click();
+}
 
 function getInputValue() {
     return this.getAttribute('value');
@@ -148,9 +155,37 @@ function onCatchGenericError(err) {
 }
 
 
+function setRadioButtonValueByLabelFor(labelFor) {
+    return element(by.css(`label[for="${labelFor}"]`)).click();
+}
+
+
+function setRadioButtonValueByLabelText(labelText, elementContainer) {
+    var el = elementContainer || element;
+    return el.all(by.tagName('label'))
+        .filter(filterElementByText.bind(null, labelText))
+        .then(clickFirstElement)
+        .catch(onCatchGenericError);
+}
 
 // ===========================================================================================
 
+function filterElementByText(textToFind, element) {
+    return element.getText()
+            .then(checkText)
+            .catch(onCatchGenericError);
+ 
+    function checkText(text) {
+        return text.toUpperCase() === textToFind.toUpperCase();
+    }
+}
+
+function clickFirstElement(elements) {
+    if (!elements.length) {
+        throw new Error('There are no elements in the given elements collection');
+    } 
+    return elements[0].click();
+}
 
 function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
     let deferred = protractor.promise.defer();
