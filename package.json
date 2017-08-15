@@ -28,6 +28,7 @@
     "gulp-cli": "^1.4.0",
     "gulp-live-server": "0.0.31",
     "gulp-minify": "^1.0.0",
+    "gulp-protractor": "^4.1.0",
     "lite-server": "^2.3.0",
     "protractor": "^5.1.2"
   },

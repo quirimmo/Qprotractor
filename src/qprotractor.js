@@ -192,9 +192,9 @@ function getLabelTextOfRadioSelectedItem() {
  */
 function getTableRowsFromCSSColumnsValues(columnClassesArray) {
     let promises;
-    return this.map(function (tr) {
+    return this.map(function(tr) {
         promises = [];
-        columnClassesArray.forEach(function (columnClass) {
+        columnClassesArray.forEach(function(columnClass) {
             promises.push(tr.element(by.className(columnClass)).getText());
         });
         return promises;
@@ -208,7 +208,7 @@ function getTableRowsFromCSSColumnsValues(columnClassesArray) {
  * @param {Function} compareFunction Function to be used for comparing elements inside the ElementArrayFinder 
  * @param {string} functionName Name of the function to be called on the ElementFinder items which compose the ElementArrayFinder. Should be a valid function of ElementFinder 
  * @param {array} inputParams An array of input parameters to be passed in the functionName called on the single ElementFinder items of the ElementArrayFinder 
- * @returns {protractor.promise} A promise resolved when the ElementArrayFinder will be sorted. Then the sorted ElementArrayFinder will be available in newSortedElementArrayFinder.data. Rejected if some error occurs
+ * @returns {Promise} A promise resolved when the ElementArrayFinder will be sorted. Then the sorted ElementArrayFinder will be available in newSortedElementArrayFinder.data. Rejected if some error occurs
  */
 function sort(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
     return sortWithElementArrayFinder.call(this, newSortedElementArrayFinder, compareFunction, functionName, inputParams);
@@ -324,9 +324,9 @@ function setSelectValueByOptionText(optionText, elementContainer) {
  */
 function filterElementByText(textToFind, element) {
     return element.getText()
-            .then(checkText)
-            .catch(onCatchGenericError);
- 
+        .then(checkText)
+        .catch(onCatchGenericError);
+
     function checkText(text) {
         return text.toUpperCase() === textToFind.toUpperCase();
     }
@@ -342,7 +342,7 @@ function filterElementByText(textToFind, element) {
 function clickFirstElement(elements) {
     if (!elements.length) {
         throw new Error('There are no elements in the given elements collection');
-    } 
+    }
     return elements[0].click();
 }
 
@@ -353,15 +353,16 @@ function clickFirstElement(elements) {
  * @param {Function} compareFunction A comparable function which will be used to sort the ElementFinder items of the ElementArrayFinder
  * @param {string} functionName String of a function to be called over all the ElementFinder items retrieved from the calling ElementArryFinder. This function produces the values to be compared to the compareFunction
  * @param {array} inputParams Array of input parameters to be applied to the given functionName when called
- * @returns {protractor.promise} A promise resolved when the new sorted ElementArrayFinder will be assigned to the data property of the input newSortedElementArrayFinder
+ * @returns {Promise} A promise resolved when the new sorted ElementArrayFinder will be assigned to the data property of the input newSortedElementArrayFinder
  */
 function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
-    let deferred = protractor.promise.defer();
-    this.then(asyncPlugin(elements => {
-        newSortedElementArrayFinder.data = baseImplementOfSort(elements, compareFunction, functionName, inputParams);
-        deferred.fulfill();
-    }));
-    return deferred;
+    return new Promise((resolve, reject) => {
+        this
+            .then(asyncPlugin(elements => {
+                newSortedElementArrayFinder.data = baseImplementOfSort(elements, compareFunction, functionName, inputParams);
+                resolve();
+            }));
+    });
 }
 
 
@@ -374,7 +375,7 @@ function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction
  * @returns {ElementArrayFinder} The new sorted ElementArrayFinder
  */
 function baseImplementOfSort(elements, compareFunction, functionName, inputParams) {
-    const comparableArray = awaitPlugin (protractor.promise.all(elements.map(asyncPlugin(x => [awaitPlugin (x[functionName].apply(x, inputParams)), x]))));
+    const comparableArray = awaitPlugin(protractor.promise.all(elements.map(asyncPlugin(x => [awaitPlugin(x[functionName].apply(x, inputParams)), x]))));
     comparableArray.sort(compareFunction);
     const sortedArray = comparableArray.map(x => x[1]);
     return protractor.getElementArrayFinderFromArrayOfElementFinder(sortedArray);
