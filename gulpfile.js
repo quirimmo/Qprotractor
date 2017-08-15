@@ -62,14 +62,13 @@ gulp.task('copy-app-components', ['clean-app-components'], function() {
         .pipe(gulp.dest(PATH.components));
 });
 
-gulp.task('protractor-test', ['serve-demo-app'], function() {
+gulp.task('protractor-test', ['serve-demo-app'], function(cb) {
     gulp.src(PATH.test)
         .pipe(protractor({
             configFile: PATH.protractorConfig,
             args: ['--baseUrl', 'http://localhost:9000']
         }))
-        .pipe(gulp.task)
-        .on('error', function(e) { throw e })
+        .on('error', function(e) { throw e });
 });
 
 gulp.task('protractor-test-stop', ['protractor-test'], function() {
