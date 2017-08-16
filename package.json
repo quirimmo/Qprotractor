@@ -4,7 +4,8 @@
   "description": "An utility library for protractor",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepush": "npm test",
+    "test": "gulp protractor-test"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,13 @@
     "asyncawait": "^1.0.6"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-cli": "^1.4.0",
+    "gulp-live-server": "0.0.31",
+    "gulp-minify": "^1.0.0",
+    "gulp-protractor": "^4.1.0",
+    "husky": "^0.14.3",
     "lite-server": "^2.3.0",
     "protractor": "^5.1.2"
   },

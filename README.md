@@ -15,3 +15,9 @@ doxdox for generation of documentation from jsdoc
 | name                   | params           |
 |------------------------|------------------|
 | dasjdklasjdklsjadlksja | dasldjaslkdsjalk |
+
+
+doxdox 'src/qprotractor.js' --layout bootstrap --output index.html
+doxdox 'src/qprotractor.js' --layout markdown --output DOCUMENTATION.md
+
+Update the seleniumServerAddress in the protractor config according to the version in your folder

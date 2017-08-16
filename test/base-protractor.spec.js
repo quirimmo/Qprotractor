@@ -1,7 +1,7 @@
 describe('Base Protractor Tests', function() {
 
     beforeAll(function() {
-        browser.get('http://localhost:3000/sample/app/index.html');
+        browser.get('http://localhost:9000/');
     });
 
     describe('getLabelTextByForAttribute', function() {
@@ -16,9 +16,9 @@ describe('Base Protractor Tests', function() {
 
         it('should select a radio button by the value of the label for associated to it', function() {
             expect(element(by.id('live-in-my-country')).getCheckedValue()).toBeNull();
-            protractor.setRadioButtonValueByLabelFor('live-in-my-country').then(
-                expect(element(by.id('live-in-my-country')).getCheckedValue()).toEqual('true')
-            );
+            protractor.setRadioButtonValueByLabelFor('live-in-my-country').then(function() {
+                expect(element(by.id('live-in-my-country')).getCheckedValue()).toEqual('true');
+            });
         });
 
     });

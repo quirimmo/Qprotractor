@@ -1,19 +1,12 @@
 <div>
-    <h3>I am the main template!</h3>
     <ng-form>
         <div>
             <label class="elementsToSort" sort-order-attribute="12" for="username">Username: </label>
             <input type="text" id="username" ng-model="username" placeholder="Type your username" />
-        </div>
-        <br>
-        <div>
             <label class="elementsToSort" for="marital-status" sort-order-attribute="6">Marital Status: </label>
             <select id="marital-status" ng-options="maritalStatusItem for maritalStatusItem in maritalStatusList" ng-model="maritalStatus">
                 <option value="">---Please select---</option>
             </select>
-        </div>
-        <br>
-        <div>
             <label class="elementsToSort" sort-order-attribute="2">
                 Do you have dogs:
                 <input type="checkbox" id="dogs-checkbox" ng-model="dogsCheckbox" ng-true-value="'YES'" ng-false-value="'NO'">
@@ -39,9 +32,6 @@
             <input type="text" id="disabled-field" ng-model="disabledField" ng-disabled="true">
             <label class="elementsToSort" for="enabled-field">Enabled Field: </label>
             <input type="text" id="enabled-field" ng-model="enabledField" ng-disabled="false">
-        </div>
-        <br>
-        <div>
             <label class="elementsToSort" for="hidden-field">Hidden Field: </label>
             <input type="text" id="hidden-field" ng-model="hiddenField" ng-hide="true">
         </div>
