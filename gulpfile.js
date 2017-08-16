@@ -39,21 +39,13 @@ gulp.task('publish', ['clean-dist'], function() {
         }))
         .pipe(gulp.dest(PATH.dist));
 });
-let server;
-gulp.task('serve-demo-app-watch', function() {
-    server = gls.static(PATH.app, 9000);
+
+gulp.task('serve', function() {
+    let server = gls.static(PATH.app, 9000);
     server.start();
     gulp.watch(APP_FILES_TO_WATCH, function(file) {
         server.notify.apply(server, [file]);
     });
-});
-gulp.task('serve-demo-app', function() {
-    server = gls.static(PATH.app, 9000);
-    server.start();
-});
-
-gulp.task('stop-demo-app', function() {
-    server.stop();
 });
 
 gulp.task('copy-app-components', ['clean-app-components'], function() {
@@ -62,16 +54,22 @@ gulp.task('copy-app-components', ['clean-app-components'], function() {
         .pipe(gulp.dest(PATH.components));
 });
 
-gulp.task('protractor-test', ['serve-demo-app'], function(cb) {
-    gulp.src(PATH.test)
+
+let serverNoWatch;
+gulp.task('serve-no-watch', function() {
+    serverNoWatch = gls.static(PATH.app, 9000);
+    serverNoWatch.start();
+});
+
+gulp.task('protractor-test', ['serve-no-watch'], function() {
+    return gulp.src(PATH.test)
         .pipe(protractor({
             configFile: PATH.protractorConfig,
             args: ['--baseUrl', 'http://localhost:9000']
         }))
-        .on('error', function(e) { throw e });
-});
-
-gulp.task('protractor-test-stop', ['protractor-test'], function() {
-    let server = gls.static(PATH.app, 9000);
-    server.stop();
+        .on('close', function() {
+            console.log('exit'); 
+            serverNoWatch.stop();
+        })
+        .on('error', function(e) { throw e; });
 });
