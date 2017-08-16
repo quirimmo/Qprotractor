@@ -4,6 +4,15 @@
 
 TODO LIST!!!!
 
+Explain all the procedure for running stuff gulp tasks etc etc etc
+Explain how to generate documentation
+Explain the structure of the project
+Explain how to contribute
+List todo list tasks
+Create table of contents with links to everywhere
+Create Main api list with links to api description
+Separate list of apis through ElementFinder, ElementArrayFinder, protractor
+
 chrome version:
 webdriver-manager update --versions.chrome 2.24
 webdriver-manager start --versions.chrome 2.24
@@ -21,7 +30,7 @@ doxdox for generation of documentation from jsdoc
 doxdox 'src/qprotractor.js' --layout bootstrap --output index.html
 doxdox 'src/qprotractor.js' --layout markdown --output DOCUMENTATION.md
 
-Update the seleniumServerAddress in the protractor config according to the version in your folder
+Explain Update the seleniumServerAddress in the protractor config according to the version in your folder
 
 <hr>
 
