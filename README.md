@@ -2,7 +2,7 @@
 
 <hr>
 
-TODO LIST!!!!
+## TODO LIST
 
 Explain all the procedure for running stuff gulp tasks etc etc etc
 Explain how to generate documentation
@@ -14,21 +14,20 @@ Create Main api list with links to api description
 Separate list of apis through ElementFinder, ElementArrayFinder, protractor
 
 chrome version:
-webdriver-manager update --versions.chrome 2.24
-webdriver-manager start --versions.chrome 2.24
 
-lite-server for running app
+`webdriver-manager update --versions.chrome 2.24`
 
-http://localhost:3000/sample/app/index.html#!/main
+`webdriver-manager start --versions.chrome 2.24`
 
-doxdox for generation of documentation from jsdoc
+lite-server for running app:
 
-| name                   | params           |
-|------------------------|------------------|
-| dasjdklasjdklsjadlksja | dasldjaslkdsjalk |
+`http://localhost:9000`
 
-doxdox 'src/qprotractor.js' --layout bootstrap --output index.html
-doxdox 'src/qprotractor.js' --layout markdown --output DOCUMENTATION.md
+doxdox for generation of documentation from jsdoc:
+
+`doxdox 'src/qprotractor.js' --layout bootstrap --output index.html`
+
+`doxdox 'src/qprotractor.js' --layout markdown --output DOCUMENTATION.md`
 
 Explain Update the seleniumServerAddress in the protractor config according to the version in your folder
 
@@ -389,3 +388,5 @@ Sort the provided array of ElementFinder and return a new ElementArrayFinder whi
 #### Returns
 
 - `ElementArrayFinder`  The new sorted ElementArrayFinder
+
+<hr>
