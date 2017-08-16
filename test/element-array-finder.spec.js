@@ -45,7 +45,7 @@ describe('ElementArrayFinder Tests', function() {
                     'Do you have dogs:',
                     'I am a Male',
                     'Marital Status:',
-                    'Username:aaa'
+                    'Username:'
                 ]);
             });
         });
