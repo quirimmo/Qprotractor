@@ -1,1 +1,1 @@
-require(__dirname + '/src/qprotractor');
+require(__dirname + '/dist/qprotractor.min');

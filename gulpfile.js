@@ -21,6 +21,7 @@ const APP_COMPONENTS = [
 ];
 
 
+
 gulp.task('clean-dist', function() {
     return gulp.src(PATH.dist, { read: false }).pipe(clean());
 });
@@ -40,7 +41,7 @@ gulp.task('publish', ['clean-dist'], function() {
         .pipe(gulp.dest(PATH.dist));
 });
 
-gulp.task('serve', function() {
+gulp.task('serve', ['publish'], function() {
     let server = gls.static(PATH.app, 9000);
     server.start();
     gulp.watch(APP_FILES_TO_WATCH, function(file) {
@@ -48,17 +49,16 @@ gulp.task('serve', function() {
     });
 });
 
+let serverNoWatch;
+gulp.task('serve-no-watch', ['publish'], function() {
+    serverNoWatch = gls.static(PATH.app, 9000);
+    serverNoWatch.start();
+});
+
 gulp.task('copy-app-components', ['clean-app-components'], function() {
     gulp
         .src(APP_COMPONENTS)
         .pipe(gulp.dest(PATH.components));
-});
-
-
-let serverNoWatch;
-gulp.task('serve-no-watch', function() {
-    serverNoWatch = gls.static(PATH.app, 9000);
-    serverNoWatch.start();
 });
 
 gulp.task('protractor-test', ['serve-no-watch'], function() {
