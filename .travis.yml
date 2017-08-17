@@ -1,9 +1,9 @@
-# sudo: required
-# dist: trusty
+sudo: required
+dist: trusty
 
 language: node_js
-# node_js:
-#   - '4.4'
+node_js:
+  - '6.11'
 
 # Should skip the install phase
 # install: true
@@ -16,11 +16,11 @@ language: node_js
 #   - sudo apt-get update -q
 #   - sudo apt-get install -q google-chrome-stable
 
-# before_script:
-#   - npm install
+before_script:
+  - npm install
 
-# script:
-  # - echo "Triggered!"
+script:
+  - echo "Triggered!"
   # - gulp build
 
 # after_success:
