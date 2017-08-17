@@ -20,7 +20,7 @@ before_script:
   - npm install
 
 script:
-  - echo "Triggered!"
+  - echo "Triggered through push!"
   # - gulp build
 
 # after_success:
