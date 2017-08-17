@@ -21,7 +21,7 @@ before_script:
 
 script:
   - echo "Triggered through push!"
-  # - gulp build
+  - gulp protractor-test
 
 # after_success:
   # - TRAVIS_MAIN_FOLDER=./travis
