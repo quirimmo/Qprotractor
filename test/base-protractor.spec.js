@@ -1,7 +1,8 @@
 describe('Base Protractor Tests', function() {
 
     beforeAll(function() {
-        browser.get('http://localhost:9000/');
+        // browser.get('http://localhost:9000/');
+        browser.get('/');
     });
 
     describe('getLabelTextByForAttribute', function() {
