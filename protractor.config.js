@@ -15,6 +15,7 @@ exports.config = {
     capabilities: {
         'browserName': 'chrome'
     },
+    baseUrl: 'http://localhost:9000',
     seleniumServerJar: `./node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-${seleniumVersion}.jar`,
     specs: [
         './test/base-protractor.spec.js',
