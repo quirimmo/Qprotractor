@@ -33,7 +33,9 @@ before_script:
 install:
   # - npm install -g selenium-webdriver
   - npm install
+  - sleep 5
   - node_modules/protractor/bin/webdriver-manager update
+  - sleep 5
 
 script:
   - echo "Triggered through push!"
