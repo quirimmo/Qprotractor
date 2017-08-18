@@ -14,7 +14,11 @@ if (!seleniumVersion) {
 // allScriptsTimeout: 40000,
 // getPageTimeout: 40000,
 exports.config = {
+    allScriptsTimeout: 11000,
     framework: 'jasmine2',
+    jasmineNodeOpts: {
+        defaultTimeoutInterval: 30000
+    },
     capabilities: {
         'browserName': 'chrome'
     },
