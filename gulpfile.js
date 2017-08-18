@@ -73,15 +73,3 @@ gulp.task('protractor-test', ['serve-no-watch'], function() {
         })
         .on('error', function(e) { throw e; });
 });
-
-gulp.task('selenium-version', function() {
-    const testFolder = './node_modules/protractor/node_modules/webdriver-manager/selenium/';
-    const fs = require('fs');
-    let res;
-    fs.readdirSync(testFolder).forEach(file => {
-        res = file.match(/selenium-server-standalone-(\d{1}.\d{1}.\d{1}).jar/i);
-        if (res) {
-            console.log(res[1]);
-        } 
-    })
-});
