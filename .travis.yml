@@ -37,9 +37,7 @@ install:
   
 script:
   - echo "Triggered through push!"
-  - cd node_modules/protractor/node_modules/webdriver-manager/selenium
-  - ls
-  # - gulp protractor-test
+  - gulp protractor-test
 
 # after_success:
   # - TRAVIS_MAIN_FOLDER=./travis
