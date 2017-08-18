@@ -37,12 +37,15 @@ before_script:
 install:
   # - npm install -g selenium-webdriver
   - npm install
+  - export PATH=$PWD/node_modules/protractor/node_modules/webdriver-manager/bin:$PATH
+  - webdriver-manager update
 
 script:
   - echo "Triggered through push!"
+  - SELENIUM_VERSION=$(webdriver-manager status | grep standalone | awk '{print $(NF-1)}')
+  - SELENIUM_SERVER_JAR=$PWD/node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-${SELENIUM_VERSION}.jar
   - pwd
   - env
-  - ls -alh *
   - gulp protractor-test
 
 # after_success:
