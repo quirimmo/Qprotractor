@@ -43,7 +43,7 @@ install:
 script:
   - echo "Triggered through push!"
   - SELENIUM_VERSION=$(webdriver-manager status | grep standalone | awk '{print $(NF-1)}')
-  - SELENIUM_SERVER_JAR=$PWD/node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-${SELENIUM_VERSION}.jar
+  - export SELENIUM_SERVER_JAR=$PWD/node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-${SELENIUM_VERSION}.jar
   - pwd
   - env
   - gulp protractor-test
