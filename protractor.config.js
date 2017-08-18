@@ -12,6 +12,7 @@ if (!seleniumVersion) {
 }
 
 exports.config = {
+    directConnect: false,
     allScriptsTimeout: 11000,
     getPageTimeout: 10000,
     framework: 'jasmine2',
