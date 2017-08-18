@@ -1,5 +1,5 @@
 exports.config = {
-    seleniumServerJar: './node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.5.0.jar',
+    seleniumAddress: process.env.SELENIUM_SERVER_JAR || 'http://127.0.0.1:4444/wd/hub/',
     specs: [
         './test/base-protractor.spec.js',
         './test/element-finder.spec.js',
