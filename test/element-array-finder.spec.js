@@ -2,9 +2,6 @@ describe('ElementArrayFinder Tests', function() {
 
     beforeAll(function() {
         browser.get('http://localhost:9000/');
-        browser.wait(function() {
-            return browser.executeScript('return !!window.angular');
-        }, 5000);
     });
 
     describe('getValueOfRadioSelectedItem', function() {

@@ -11,10 +11,9 @@ if (!seleniumVersion) {
     throw new Error('No selenium server jar found inside your protractor node_modules subfolder');
 }
 
-// allScriptsTimeout: 40000,
-// getPageTimeout: 40000,
 exports.config = {
     allScriptsTimeout: 11000,
+    getPageTimeout: 10000,
     framework: 'jasmine2',
     jasmineNodeOpts: {
         defaultTimeoutInterval: 30000
