@@ -36,7 +36,15 @@ install:
 
 script:
   - echo "Triggered through push!"
-  - cd node_modules/protractor/node_modules/webdriver-manager/selenium
+  - cd node_modules
+  - ls
+  - cd protractor
+  - ls
+  - cd node_modules
+  - ls 
+  - cd webdriver-manager
+  - ls 
+  - cd selenium
   - ls
   # - gulp protractor-test
 
