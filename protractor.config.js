@@ -27,6 +27,5 @@ exports.config = {
     ],
     onPrepare: function() {
         require('./index');
-        browser.debugger();
     }
 };
