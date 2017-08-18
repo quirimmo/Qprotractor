@@ -33,20 +33,11 @@ before_script:
 install:
   # - npm install -g selenium-webdriver
   - npm install
+  - cd node_modules/protractor/bin/webdriver-manager update
 
 script:
   - echo "Triggered through push!"
-  - cd node_modules
-  - ls
-  - cd protractor
-  - ls
-  - cd node_modules
-  - ls 
-  - cd webdriver-manager
-  - ls 
-  - cd selenium
-  - ls
-  # - gulp protractor-test
+  - gulp protractor-test
 
 # after_success:
   # - TRAVIS_MAIN_FOLDER=./travis
