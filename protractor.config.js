@@ -14,6 +14,7 @@ if (!seleniumVersion) {
 // allScriptsTimeout: 40000,
 // getPageTimeout: 40000,
 exports.config = {
+    framework: 'jasmine2',
     capabilities: {
         'browserName': 'chrome'
     },
