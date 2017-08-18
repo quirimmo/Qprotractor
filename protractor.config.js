@@ -31,8 +31,5 @@ exports.config = {
     ],
     onPrepare: function() {
         require('./index');
-        browser.wait(function() {
-            return browser.executeScript('return !!window.angular');
-        }, 5000);
     }
 };
