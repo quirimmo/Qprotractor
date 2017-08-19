@@ -30,7 +30,7 @@ gulp.task('clean-app-components', function() {
     return gulp.src(PATH.components, { read: false }).pipe(clean());
 });
 
-gulp.task('publish', ['clean-dist'], function() {
+gulp.task('publish', ['clean-dist', 'copy-app-components'], function() {
     gulp
         .src(PATH.src)
         .pipe(minify({
