@@ -31,5 +31,6 @@ exports.config = {
     ],
     onPrepare: function() {
         require('./index');
+        browser.waitForAngularEnabled(true);
     }
 };

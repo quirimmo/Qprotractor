@@ -31,8 +31,6 @@
     "gulp-minify": "^1.0.0",
     "gulp-protractor": "^4.1.0",
     "husky": "^0.14.3",
-    "jasmine": "^2.7.0",
-    "lite-server": "^2.3.0",
     "protractor": "^5.1.2"
   },
   "author": "Quirino Lo Russo",
