@@ -208,22 +208,21 @@ Called on the ElementArrayFinder which holds all the tr of the table.
 
 - `protractor.promise`  A promise which holds an array of arrays where the inner arrays represent the row texts of the table associated to the given columns
 
-### sort(newSortedElementArrayFinder, compareFunction, functionName, inputParams)
+### sort(compareFunction, functionName, inputParams)
 
-Sort an ElementArrayFinder using a given compareFunction executed over the values returned by the application of the functionName with the inputParams over the ElementFinder items which compose the ElementArrayFinder
+Sort an ElementArrayFinder using a given compareFunction executed over the values returned by the application of the functionName with the inputParams over the ElementFinder items which compose the ElementArrayFinder.
 
 #### Parameters
 
 | Name                        | Type       | Description                                                                                            |
 |-----------------------------|------------|--------------------------------------------------------------------------------------------------------|
-| newSortedElementArrayFinder | `Object`   | An object which will hold inside the data property the new sorted ElementArrayFinder                   |
 | compareFunction             | `Function` | Function to be used for comparing elements inside the ElementArrayFinder                               |
 | functionName                | `string`   | Name of the function called on the ElementFinder items. Should be a valid function of ElementFinder    |
 | inputParams                 | `array`    | An array of input parameters to be passed in the functionName called on the single ElementFinder items |
 
 #### Returns
 
-- `protractor.promise`  A promise resolved when the ElementArrayFinder will be sorted. Then the sorted ElementArrayFinder will be available in newSortedElementArrayFinder.data. The promise will be resolved passing the ElementArrayFinder, so you can directly access from the then the array of ElementFinder items. Rejected if some error occurs
+- `protractor.promise`  A promise which holds the sorted ElementArrayFinder. Then the sorted ElementArrayFinder will be available in result property of the object returned from the promise. Rejected if some error occurs.
 
 ### getLabelTextByForAttribute(forValue)
 
@@ -324,69 +323,5 @@ Select an option from a select depending on the provided optionText
 #### Returns
 
 - `protractor.promise`  A promise resolved when the option of the select has been selected. Rejected if some error occurs
-
-### filterElementByText(textToFind, element)
-
-Get the result of the comparison between the given textToFind and the text of the given ElementFinder element
-
-#### Parameters
-
-| Name       | Type            | Description                                 |
-|------------|-----------------|---------------------------------------------|
-| textToFind | `string`        | The text to use for the comparison with the |
-| element    | `ElementFinder` | The element you want to check the text for  |
-
-#### Returns
-
-- `protractor.promise`  A promise which holds the check of the current element text with the given textToFind. Rejected if some error occurs
-
-### clickFirstElement(elements)
-
-Click on the first element of the given array elements of ElementFinder items.
-If the array has not items, it throws an error
-
-#### Parameters
-
-| Name     | Type    | Description                  |
-|----------|---------|------------------------------|
-| elements | `array` | Array of ElementFinder items |
-
-#### Returns
-
-- `protractor.promise`  A promise resolved when the element will be clicked. Throw an error if there are no elements provided
-
-### sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction, functionName, inputParams)
-
-Resolve the calling ElementArrayFinder and call the sort over it providing the parameters, assign the returning sorted ElementArrayFinder to the data property of the input newSortedElementArrayFinder
-
-#### Parameters
-
-| Name                        | Type       | Description                                                                                                                      |
-|-----------------------------|------------|----------------------------------------------------------------------------------------------------------------------------------|
-| newSortedElementArrayFinder | `Object`   | An object which will hold inside the data property the new sorted ElementArrayFinder                                             |
-| compareFunction             | `Function` | A comparable function which will be used to sort the ElementFinder items of the ElementArrayFinder                               |
-| functionName                | `string`   | String of a function to be called over all the ElementFinder items. It produces the values to be compared to the compareFunction |
-| inputParams                 | `array`    | Array of input parameters to be applied to the given functionName when called                                                    |
-
-#### Returns
-
-- `protractor.promise`  A promise resolved when the new sorted ElementArrayFinder will be assigned to the data property of the input newSortedElementArrayFinder. The promise will be resolved passing the ElementArrayFinder, so from the then of this promise you can directly access already the array of ElementFinder items given from the resolution of the ElementArrayFinder.
-
-### baseImplementOfSort(elements, compareFunction, functionName, inputParams)
-
-Sort the provided array of ElementFinder and return a new ElementArrayFinder which includes all the sorted elements
-
-#### Parameters
-
-| Name            | Type       | Description                                                                                                                      |
-|-----------------|------------|----------------------------------------------------------------------------------------------------------------------------------|
-| elements        | `array`    | Array of ElementFinder to be sorted                                                                                              |
-| compareFunction | `Function` | A comparable function used for sorting the provided elements                                                                     |
-| functionName    | `string`   | String of a function to be called over all the ElementFinder items. It produces the values to be compared to the compareFunction |
-| inputParams     | `array`    | Array of input parameters to be applied to the given functionName when called                                                    |
-
-#### Returns
-
-- `ElementArrayFinder`  The new sorted ElementArrayFinder
 
 <hr>
