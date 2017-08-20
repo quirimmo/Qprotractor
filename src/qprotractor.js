@@ -27,7 +27,6 @@ protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinder
 protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
 protractor.setRadioButtonValueByLabelText = setRadioButtonValueByLabelText;
 protractor.setSelectValueByOptionText = setSelectValueByOptionText;
-protractor.filterElementByAttributeChecked = filterElementByAttributeChecked;
 protractor.onCatchGenericError = onCatchGenericError;
 
 
