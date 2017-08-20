@@ -30,7 +30,7 @@ gulp.task('clean-app-components', function() {
     return gulp.src(PATH.components, { read: false }).pipe(clean());
 });
 
-gulp.task('publish', ['clean-dist'], function() {
+gulp.task('publish', ['clean-dist', 'copy-app-components'], function() {
     gulp
         .src(PATH.src)
         .pipe(minify({
@@ -64,8 +64,7 @@ gulp.task('copy-app-components', ['clean-app-components'], function() {
 gulp.task('protractor-test', ['serve-no-watch'], function() {
     return gulp.src(PATH.test)
         .pipe(protractor({
-            configFile: PATH.protractorConfig,
-            args: ['--baseUrl', 'http://localhost:9000']
+            configFile: PATH.protractorConfig
         }))
         .on('close', function() {
             console.log('exit'); 

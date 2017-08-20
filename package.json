@@ -1,7 +1,7 @@
 {
   "name": "qprotractor",
   "version": "1.0.0",
-  "description": "An utility library for protractor",
+  "description": "An utility library for protractor providing several utility methods which extend the ElementFinder, the ElementArrayFinder and the protractor objects",
   "main": "index.js",
   "scripts": {
     "prepush": "npm test",
@@ -31,7 +31,6 @@
     "gulp-minify": "^1.0.0",
     "gulp-protractor": "^4.1.0",
     "husky": "^0.14.3",
-    "lite-server": "^2.3.0",
     "protractor": "^5.1.2"
   },
   "author": "Quirino Lo Russo",

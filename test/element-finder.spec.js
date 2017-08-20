@@ -1,7 +1,7 @@
 describe('ElementFinder Tests', function() {
 
     beforeAll(function() {
-        browser.get('http://localhost:9000/');
+        browser.get('/');
     });
 
     describe('getInputValue', function() {

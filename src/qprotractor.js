@@ -27,6 +27,8 @@ protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinder
 protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
 protractor.setRadioButtonValueByLabelText = setRadioButtonValueByLabelText;
 protractor.setSelectValueByOptionText = setSelectValueByOptionText;
+protractor.filterElementByAttributeChecked = filterElementByAttributeChecked;
+protractor.onCatchGenericError = onCatchGenericError;
 
 
 
@@ -204,14 +206,13 @@ function getTableRowsFromCSSColumnsValues(columnClassesArray) {
 
 /**
  * Sort an ElementArrayFinder using a given compareFunction executed over the values returned by the application of the functionName with the inputParams over the ElementFinder items which compose the ElementArrayFinder
- * @param {Object} newSortedElementArrayFinder An object which will hold inside the data property the new sorted ElementArrayFinder 
  * @param {Function} compareFunction Function to be used for comparing elements inside the ElementArrayFinder 
  * @param {string} functionName Name of the function to be called on the ElementFinder items which compose the ElementArrayFinder. Should be a valid function of ElementFinder 
  * @param {array} inputParams An array of input parameters to be passed in the functionName called on the single ElementFinder items of the ElementArrayFinder 
- * @returns {protractor.promise} A promise resolved when the ElementArrayFinder will be sorted. Then the sorted ElementArrayFinder will be available in newSortedElementArrayFinder.data. The promise will be resolved passing the ElementArrayFinder, so you can directly access from the then the array of ElementFinder items. Rejected if some error occurs
+ * @returns {protractor.promise} A promise resolved which holds the ElementArrayFinder sorted.
  */
-function sort(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
-    return sortWithElementArrayFinder.call(this, newSortedElementArrayFinder, compareFunction, functionName, inputParams);
+function sort(compareFunction, functionName, inputParams) {
+    return sortWithElementArrayFinder.call(this, compareFunction, functionName, inputParams);
 }
 
 
@@ -348,19 +349,19 @@ function clickFirstElement(elements) {
 
 
 /**
- * Resolve the calling ElementArrayFinder and call the sort over it providing the parameters, assign the returning sorted ElementArrayFinder to the data property of the input newSortedElementArrayFinder
- * @param {Object} newSortedElementArrayFinder An object which will hold inside the data property the new sorted ElementArrayFinder
+ * Resolve the calling ElementArrayFinder and call the sort over it providing the parameters, resolving the promise with the sorted ElementArrayFinder
  * @param {Function} compareFunction A comparable function which will be used to sort the ElementFinder items of the ElementArrayFinder
  * @param {string} functionName String of a function to be called over all the ElementFinder items retrieved from the calling ElementArrayFinder. This function produces the values to be compared to the compareFunction
  * @param {array} inputParams Array of input parameters to be applied to the given functionName when called
- * @returns {protractor.promise} A promise resolved when the new sorted ElementArrayFinder will be assigned to the data property of the input newSortedElementArrayFinder. The promise will be resolved passing the ElementArrayFinder, so from the then of this promise you can directly access already the array of ElementFinder items given from the resolution of the ElementArrayFinder.
+ * @returns {protractor.promise} A promise resolved which holds the new sorted ElementArrayFinder
  */
-function sortWithElementArrayFinder(newSortedElementArrayFinder, compareFunction, functionName, inputParams) {
+function sortWithElementArrayFinder(compareFunction, functionName, inputParams) {
     return this
         .then(asyncPlugin(elements => {
-            let sortedEl = baseImplementOfSort(elements, compareFunction, functionName, inputParams);
-            newSortedElementArrayFinder.data = sortedEl;
-            protractor.promise.fulfilled(sortedEl);
+            let sortedElement = baseImplementOfSort(elements, compareFunction, functionName, inputParams);
+            return protractor.promise.fulfilled({
+                result: sortedElement
+            });
         }));
 }
 
