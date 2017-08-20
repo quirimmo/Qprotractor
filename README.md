@@ -2,6 +2,8 @@
 
 An utility library for protractor providing several utility methods which extend the `ElementFinder`, the `ElementArrayFinder` and the `protractor` objects.
 
+[![Build Status](https://travis-ci.org/quirimmo/Qprotractor.svg?branch=master)](https://travis-ci.org/quirimmo/Qprotractor)
+
 <hr>
 
 ## Table Of Contents
@@ -33,13 +35,15 @@ An utility library for protractor providing several utility methods which extend
     * [setRadioButtonValueByLabelFor(labelFor)](#set-radio-button-value-by-label-for)
     * [setRadioButtonValueByLabelText(labelText[, elementContainer])](#set-radio-button-value-by-label-text)
     * [setSelectValueByOptionText(optionText[, elementContainer])](#set-select-value-by-option-text)
-* [Todo List](#todo-list)
+* [Developer Usage](#developer-usage)
 
 <hr>
 
 ## <a id="description"></a>Description
 
 An utility library for protractor providing several utility methods which extend the `ElementFinder`, the `ElementArrayFinder` and the `protractor` objects.
+
+The source code provides also a really simple example AngularJS application where you can test your methods or test the usage of the existing methods.
 
 <hr>
 
@@ -49,7 +53,7 @@ Simply install it from the npm registry through:
 
 `npm install --save-dev qprotractor`
 
-Once installed it, `require('qptractor')` at the beginning of you `onPrepare` hook of protractor, in order to make the methods available inside all the protractor life cycle and files:
+Once installed it, `require('qptractor')` at the beginning of your `onPrepare` hook of protractor, in order to make the methods available inside all the protractor life cycle and files:
 
 ```javascript
 exports.config = {
@@ -64,9 +68,11 @@ exports.config = {
 
 ## <a id="api"></a>API
 
-For a better view of api, please open the following link (link to uploaded generated HTML doc):
+Here the list of all the methods provided by the library. The methods extend `ElementFinder`, `ElementArrayFinder` and `protractor` and here they are grouped by the kind of object which they extend.
 
-http://www.google.it
+You can see the usage of all the APIs inside the files contained in the folder `test`. You will find an example for all the methods listed below. 
+
+## <a id="element-finder-methods"></a>ElementFinder Methods
 
 ### <a id="click-on-parent"></a>clickOnParent()
 
@@ -181,6 +187,8 @@ Wait for an ElementFinder to be present in a given delay, and if present then ex
 
 - `protractor.promise`  A promise rejected if the element is not present in the provided time, otherwise it holds the value returned by the provided function to call
 
+## <a id="element-array-finder-methods"></a>ElementArrayFinder Methods
+
 ### <a id="get-value-of-radio-selected-item"></a>getValueOfRadioSelectedItem()
 
 Get the value associated to the checked option of a radio button. Called on the ElementArrayFinder associated to all the elements of the radio input
@@ -227,6 +235,8 @@ Sort an ElementArrayFinder using a given compareFunction executed over the value
 #### Returns
 
 - `protractor.promise`  A promise which holds the sorted ElementArrayFinder. Then the sorted ElementArrayFinder will be available in result property of the object returned from the promise. Rejected if some error occurs.
+
+## <a id="protractor-methods"></a>Protractor Methods
 
 ### <a id="get-label-text-by-for-attribute"></a>getLabelTextByForAttribute(forValue)
 
@@ -330,33 +340,47 @@ Select an option from a select depending on the provided optionText
 
 <hr>
 
-## <a id="todo-list"></a>Todo List
+## <a id="developer-usage"></a>Developer Usage
 
-Explain all the procedure for running stuff gulp tasks etc etc etc
-Explain how to generate documentation
-Explain the structure of the project
-Explain how to contribute
-List todo list tasks
-Create table of contents with links to everywhere
-Create Main api list with links to api description
-Separate list of apis through ElementFinder, ElementArrayFinder, protractor
+If you want to contribute to the current project, any help is more than welcome!
 
-chrome version:
+In order to contribute on it, first clone the repository and get the source code:
 
-`webdriver-manager update --versions.chrome 2.24`
+`git clone https://github.com/quirimmo/Qprotractor.git`
 
-`webdriver-manager start --versions.chrome 2.24`
+Then install all the dependencies:
 
-lite-server for running app:
+`npm install`
 
-`http://localhost:9000`
+Once you've done that, you may need to install the webdriver-manager through:
 
-doxdox for generation of documentation from jsdoc:
+`node_modules/protractor/bin/webdriver-manager update`
 
-`doxdox 'src/qprotractor.js' --layout bootstrap --output index.html`
+After that, you can simply use the gulp tasks in order to run the application.
 
-`doxdox 'src/qprotractor.js' --layout markdown --output DOCUMENTATION.md`
+For example, if you want to run the AngularJS application used as example of usage of the library, you can trigger the following gulp task:
 
-Explain Update the seleniumServerAddress in the protractor config according to the version in your folder
+`gulp serve`
+
+This will make the application available at the following address:
+
+[http://localhost:9000/](http://localhost:9000/)
+
+If you want to execute instead all the tests, you simply need to run the following task and everything will start automatically:
+
+`gulp protractor-test`
+
+The application uses `husky` in order to trigger the e2e-tests before to push. If any of the tests will fail, you would not be able to push on the repository.
+After pushed, `travis` will be triggered in order to execute the job. If the job fails, the PR cannot be merged either.
+
+So let's suppose you want to add a new method inside the library, these are the steps to be followed:
+
+1. Add your method inside `src/qprotractor.js`
+2. Add the jsdoc of the method
+3. Add the related test and explanation of the method inside the relevant file inside the `test` folder
+4. Execute the `gulp protractor-test` to ensure that all the tests are working
+5. Add the documentation inside the README.md
+6. Push all the code in order to trigger the travis job
+7. Push again all the code in order to include the minified version of the files, but this time using `git push --no-verify` in order to bypass the local e2e tests
 
 <hr>
