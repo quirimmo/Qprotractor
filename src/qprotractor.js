@@ -21,7 +21,7 @@ protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLab
 protractor.ElementArrayFinder.prototype.sort = sort;
 protractor.ElementArrayFinder.prototype.getTableRowsFromCSSColumnsValues = getTableRowsFromCSSColumnsValues;
 
-
+protractor.ifPresentAndEnabledDoAction = ifPresentAndEnabledDoAction;
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
 protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinderFromArrayOfElementFinder;
 protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
@@ -310,6 +310,30 @@ function setSelectValueByOptionText(optionText, elementContainer) {
         .catch(onCatchGenericError);
 }
 
+
+/**
+ * Perform the given action if and only if the given element is present and displayed, otherwise return a fulfilled promise without executing the action
+ * @param {protractor.ElementFinder} elementToCheck An ElementFinder that you want to check if is present and displayed before to perform the action
+ * @param {Function} actionToDo A function which represents the action to perform if the element is present and displayed 
+ * @returns {protractor.promise} A promise corresponding to the given action provided, or a fulfilled promise if the element is not present or not displayed
+ */
+function ifPresentAndEnabledDoAction(elementToCheck, actionToDo) {
+    return elementToCheck.isPresent()
+        .then(onPresent)
+        .catch(onCatchGenericError);
+
+    function onPresent(isPresent) {
+        return isPresent ?
+            elementToCheck.isDisplayed().then(onDisplay) :
+            protractor.promise.defer().fulfill();
+    }
+
+    function onDisplay(isDisplay) {
+        return isDisplay ? 
+            actionToDo() : 
+            protractor.promise.defer().fulfill();
+    }
+}
 
 
 // Internal methods

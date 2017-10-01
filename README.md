@@ -34,6 +34,7 @@ An utility library for protractor providing several utility methods which extend
     * [setRadioButtonValueByLabelFor(labelFor)](#set-radio-button-value-by-label-for)
     * [setRadioButtonValueByLabelText(labelText[, elementContainer])](#set-radio-button-value-by-label-text)
     * [setSelectValueByOptionText(optionText[, elementContainer])](#set-select-value-by-option-text)
+    * [ifPresentAndEnabledDoAction(elementToCheck, actionToDo)](#if-present-and-enabled-do-action)
 * [Developer Usage](#developer-usage)
 
 <hr>
@@ -481,6 +482,30 @@ Select an option from a select depending on the provided optionText
 let select = element(by.id('my-select'));
 protractor.setSelectValueByOptionText('My Option Text', select).then(
   // the option with text My Option Text contained inside the select element with id my-select has been selected
+);
+```
+
+### <a id="if-present-and-enabled-do-action"></a>ifPresentAndEnabledDoAction(elementToCheck, actionToDo)
+
+Perform the given action if and only if the given element is present and displayed, otherwise return a fulfilled promise without executing the action
+
+#### Parameters
+
+| Name           | Type            | Description                                                                                 |
+|----------------|-----------------|---------------------------------------------------------------------------------------------|
+| elementToCheck | `ElementFinder` | The element that you want to check if is present and displayed before to perform the action |
+| actionToDo     | `Function`      | A function which represents the action to perform if the element is present and displayed   |
+
+#### Returns
+
+- `protractor.promise` A promise corresponding to the given action provided, or a fulfilled promise if the element is not present or not displayed
+
+#### Example
+
+```javascript
+let element = element(by.id('my-element-id'));
+protractor.ifPresentAndEnabledDoAction(element, element.click).then(
+  // action performed or promise fulfilled because the element is not present or displayed
 );
 ```
 

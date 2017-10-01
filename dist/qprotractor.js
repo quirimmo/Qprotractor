@@ -21,13 +21,12 @@ protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLab
 protractor.ElementArrayFinder.prototype.sort = sort;
 protractor.ElementArrayFinder.prototype.getTableRowsFromCSSColumnsValues = getTableRowsFromCSSColumnsValues;
 
-
+protractor.ifPresentAndEnabledDoAction = ifPresentAndEnabledDoAction;
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
 protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinderFromArrayOfElementFinder;
 protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
 protractor.setRadioButtonValueByLabelText = setRadioButtonValueByLabelText;
 protractor.setSelectValueByOptionText = setSelectValueByOptionText;
-protractor.filterElementByAttributeChecked = filterElementByAttributeChecked;
 protractor.onCatchGenericError = onCatchGenericError;
 
 
@@ -311,6 +310,25 @@ function setSelectValueByOptionText(optionText, elementContainer) {
         .catch(onCatchGenericError);
 }
 
+
+
+function ifPresentAndEnabledDoAction(elementToCheck, actionToDo) {
+    return elementToCheck.isPresent()
+        .then(onPresent)
+        .catch(onCatchGenericError);
+
+    function onPresent(isPresent) {
+        return isPresent ?
+            elementToCheck.isDisplayed().then(onDisplay) :
+            protractor.promise.defer().fulfill();
+    }
+
+    function onDisplay(isDisplay) {
+        return isDisplay ? 
+            actionToDo() : 
+            protractor.promise.defer().fulfill();
+    }
+}
 
 
 // Internal methods
