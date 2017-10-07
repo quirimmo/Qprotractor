@@ -139,6 +139,11 @@ function isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed) {
     }
 }
 
+
+/**
+ * Check if an element is displayed whether is present, returning a promise which holds a value for the visibility. If not present, return a promise which holds false
+ * @returns {Protractor.promise} A promise which holds the value if the element is displayed or not. False if the element is not present.
+ */
 function isDisplayedIfPresent() {
     return this.isPresent()
         .then(onPresent.bind(this))
@@ -350,6 +355,13 @@ function ifPresentAndEnabledDoAction(elementToCheck, actionToDo) {
 }
 
 
+/**
+ * 
+ * @param {String} field 
+ * @param {String} errorType 
+ * @param {String} [errorMessage] Optional. 
+ * @returns {Protractor.promise}
+ */
 function checkErrorValidation(field, errorType, errorMessage) {
     var el = $('[ng-messages="' + field + '"] [ng-message="' + errorType + '"]');
     var promises = [];
@@ -358,13 +370,6 @@ function checkErrorValidation(field, errorType, errorMessage) {
         promises.push(el.getText());
     }
     return protractor.promise.all(promises);
-    // var el = $('[ng-messages="' + field + '"] [ng-message="' + errorType + '"]');
-    // var promises = [];
-    // promises.push(el.isDisplayed());
-    // if (errorMessage) {
-    //     promises.push(el.getText());
-    // }
-    // return protractor.promise.all(promises);
 }
 
 
