@@ -14,6 +14,7 @@ protractor.ElementFinder.prototype.setValueIfEnabledOrProceed = setValueIfEnable
 protractor.ElementFinder.prototype.isEnabledIfDisplayedOrProceed = isEnabledIfDisplayedOrProceed;
 protractor.ElementFinder.prototype.waitAndThenExecute = waitAndThenExecute;
 protractor.ElementFinder.prototype.clickOnParent = clickOnParent;
+protractor.ElementFinder.prototype.isDisplayedIfPresent = isDisplayedIfPresent;
 
 
 protractor.ElementArrayFinder.prototype.getValueOfRadioSelectedItem = getValueOfRadioSelectedItem;
@@ -21,6 +22,7 @@ protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLab
 protractor.ElementArrayFinder.prototype.sort = sort;
 protractor.ElementArrayFinder.prototype.getTableRowsFromCSSColumnsValues = getTableRowsFromCSSColumnsValues;
 
+protractor.checkErrorValidation = checkErrorValidation;
 protractor.ifPresentAndEnabledDoAction = ifPresentAndEnabledDoAction;
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
 protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinderFromArrayOfElementFinder;
@@ -134,6 +136,18 @@ function isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed) {
         return isDisplayed ?
             this.isEnabled() :
             protractor.promise.fulfilled(isEnabledIfNotDisplayed);
+    }
+}
+
+function isDisplayedIfPresent() {
+    return this.isPresent()
+        .then(onPresent.bind(this))
+        .catch(protractor.onCatchGenericError);
+
+    function onPresent(isPresent) {
+        return isPresent ?
+            this.isDisplayed() :
+            protractor.promise.fulfilled(false);
     }
 }
 
@@ -329,10 +343,28 @@ function ifPresentAndEnabledDoAction(elementToCheck, actionToDo) {
     }
 
     function onDisplay(isDisplay) {
-        return isDisplay ? 
-            actionToDo() : 
+        return isDisplay ?
+            actionToDo() :
             protractor.promise.defer().fulfill();
     }
+}
+
+
+function checkErrorValidation(field, errorType, errorMessage) {
+    var el = $('[ng-messages="' + field + '"] [ng-message="' + errorType + '"]');
+    var promises = [];
+    promises.push(el.isDisplayedIfPresent());
+    if (errorMessage) {
+        promises.push(el.getText());
+    }
+    return protractor.promise.all(promises);
+    // var el = $('[ng-messages="' + field + '"] [ng-message="' + errorType + '"]');
+    // var promises = [];
+    // promises.push(el.isDisplayed());
+    // if (errorMessage) {
+    //     promises.push(el.getText());
+    // }
+    // return protractor.promise.all(promises);
 }
 
 

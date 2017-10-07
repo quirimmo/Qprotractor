@@ -22,6 +22,7 @@ An utility library for protractor providing several utility methods which extend
     * [setValueIfEnabledOrProceed(value)](#set-value-if-enabled-or-proceed)
     * [isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed)](#is-enabled-if-displayed-or-proceed)
     * [waitAndThenExecute(maxWaitTime, fnToExecute)](#wait-and-then-execute)
+    * [isDisplayedIfPresent()](#is-displayed-if-present)
   * [ElementArrayFinder methods](#element-array-finder-methods)
     * [getValueOfRadioSelectedItem()](#get-value-of-radio-selected-item)
     * [getLabelTextOfRadioSelectedItem()](#get-label-text-of-radio-selected-item)
@@ -263,6 +264,31 @@ function fnToExecute() {
 }
 ```
 
+### <a id="is-displayed-if-present"></a>isDisplayedIfPresent()
+
+Check if an element is displayed wether is present. Returns a promise which holds the display value, if the element is present, otherwise false.
+
+#### Parameters
+
+| Name        | Type       | Description                                                                    |
+|-------------|------------|--------------------------------------------------------------------------------|
+
+#### Returns
+
+- `protractor.promise`  A promise which holds the display value, if the element is present, otherwise false
+
+#### Example
+
+```javascript
+let el = element(by.id('my-id'));
+el.isDisplayedIfPresent().then(onDisplayedIfPresent);
+
+function onDisplayedIfPresent(isDisplayed) {
+  // false if the element is not present or present but not displayed
+  // true if the element is present and displayed
+}
+```
+
 ## <a id="element-array-finder-methods"></a>ElementArrayFinder Methods
 
 ### <a id="get-value-of-radio-selected-item"></a>getValueOfRadioSelectedItem()
@@ -326,11 +352,11 @@ Sort an ElementArrayFinder using a given compareFunction executed over the value
 
 #### Parameters
 
-| Name                        | Type       | Description                                                                                            |
-|-----------------------------|------------|--------------------------------------------------------------------------------------------------------|
-| compareFunction             | `Function` | Function to be used for comparing elements inside the ElementArrayFinder                               |
-| functionName                | `string`   | Name of the function called on the ElementFinder items. Should be a valid function of ElementFinder    |
-| inputParams                 | `array`    | An array of input parameters to be passed in the functionName called on the single ElementFinder items |
+| Name            | Type       | Description                                                                                            |
+|-----------------|------------|--------------------------------------------------------------------------------------------------------|
+| compareFunction | `Function` | Function to be used for comparing elements inside the ElementArrayFinder                               |
+| functionName    | `string`   | Name of the function called on the ElementFinder items. Should be a valid function of ElementFinder    |
+| inputParams     | `array`    | An array of input parameters to be passed in the functionName called on the single ElementFinder items |
 
 #### Returns
 

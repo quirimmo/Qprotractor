@@ -14,6 +14,7 @@ protractor.ElementFinder.prototype.setValueIfEnabledOrProceed = setValueIfEnable
 protractor.ElementFinder.prototype.isEnabledIfDisplayedOrProceed = isEnabledIfDisplayedOrProceed;
 protractor.ElementFinder.prototype.waitAndThenExecute = waitAndThenExecute;
 protractor.ElementFinder.prototype.clickOnParent = clickOnParent;
+protractor.ElementFinder.prototype.isDisplayedIfPresent = isDisplayedIfPresent;
 
 
 protractor.ElementArrayFinder.prototype.getValueOfRadioSelectedItem = getValueOfRadioSelectedItem;
@@ -135,6 +136,23 @@ function isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed) {
         return isDisplayed ?
             this.isEnabled() :
             protractor.promise.fulfilled(isEnabledIfNotDisplayed);
+    }
+}
+
+
+/**
+ * Check if an element is displayed whether is present, returning a promise which holds a value for the visibility. If not present, return a promise which holds false
+ * @returns {Protractor.promise} A promise which holds the value if the element is displayed or not. False if the element is not present.
+ */
+function isDisplayedIfPresent() {
+    return this.isPresent()
+        .then(onPresent.bind(this))
+        .catch(protractor.onCatchGenericError);
+
+    function onPresent(isPresent) {
+        return isPresent ?
+            this.isDisplayed() :
+            protractor.promise.fulfilled(false);
     }
 }
 
@@ -336,10 +354,18 @@ function ifPresentAndEnabledDoAction(elementToCheck, actionToDo) {
     }
 }
 
+
+/**
+ * 
+ * @param {String} field 
+ * @param {String} errorType 
+ * @param {String} [errorMessage] Optional. 
+ * @returns {Protractor.promise}
+ */
 function checkErrorValidation(field, errorType, errorMessage) {
     var el = $('[ng-messages="' + field + '"] [ng-message="' + errorType + '"]');
     var promises = [];
-    promises.push(el.isDisplayed());
+    promises.push(el.isDisplayedIfPresent());
     if (errorMessage) {
         promises.push(el.getText());
     }
