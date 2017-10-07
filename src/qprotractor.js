@@ -21,6 +21,7 @@ protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLab
 protractor.ElementArrayFinder.prototype.sort = sort;
 protractor.ElementArrayFinder.prototype.getTableRowsFromCSSColumnsValues = getTableRowsFromCSSColumnsValues;
 
+protractor.checkErrorValidation = checkErrorValidation;
 protractor.ifPresentAndEnabledDoAction = ifPresentAndEnabledDoAction;
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
 protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinderFromArrayOfElementFinder;
@@ -329,10 +330,20 @@ function ifPresentAndEnabledDoAction(elementToCheck, actionToDo) {
     }
 
     function onDisplay(isDisplay) {
-        return isDisplay ? 
-            actionToDo() : 
+        return isDisplay ?
+            actionToDo() :
             protractor.promise.defer().fulfill();
     }
+}
+
+function checkErrorValidation(field, errorType, errorMessage) {
+    var el = $('[ng-messages="' + field + '"] [ng-message="' + errorType + '"]');
+    var promises = [];
+    promises.push(el.isDisplayed());
+    if (errorMessage) {
+        promises.push(el.getText());
+    }
+    return protractor.promise.all(promises);
 }
 
 

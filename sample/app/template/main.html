@@ -1,5 +1,13 @@
 <div>
-    <ng-form>
+    <ng-form name="fromQprotractor">
+        <div>
+            <input type="text" id="validation-error-field" name="validationErrorField" placeholder="Enter up to 9 digits" 
+            ng-model="validationErrorField" ng-maxlength="9" ng-pattern="/^[0-9]*$/">
+            <div ng-messages="fromQprotractor.validationErrorField.$error" ng-if="fromQprotractor.validationErrorField.$dirty">
+                <div ng-message="maxlength" class="error-msg truncate">Use maximum 9 digits</div>
+                <div ng-message="pattern" class="error-msg truncate">Use digits only</div>
+            </div>
+        </div>
         <div>
             <label class="elementsToSort" sort-order-attribute="12" for="username">Username: </label>
             <input type="text" id="username" ng-model="username" placeholder="Type your username" />
