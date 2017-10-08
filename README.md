@@ -36,6 +36,7 @@ An utility library for protractor providing several utility methods which extend
     * [setRadioButtonValueByLabelText(labelText[, elementContainer])](#set-radio-button-value-by-label-text)
     * [setSelectValueByOptionText(optionText[, elementContainer])](#set-select-value-by-option-text)
     * [ifPresentAndEnabledDoAction(elementToCheck, actionToDo)](#if-present-and-enabled-do-action)
+    * [checkErrorValidation(field, errorType[, errorMessage])](#check-error-validation)
 * [Developer Usage](#developer-usage)
 
 <hr>
@@ -533,6 +534,30 @@ let element = element(by.id('my-element-id'));
 protractor.ifPresentAndEnabledDoAction(element, element.click).then(
   // action performed or promise fulfilled because the element is not present or displayed
 );
+```
+
+### <a id="check-error-validation"></a>checkErrorValidation(field, errorType[, errorMessage])
+
+Check if the given field presents the given error type, and eventually if the error message is the same as provided
+
+#### Parameters
+
+| Name         | Type     | Description                                                                                                               |
+|--------------|----------|---------------------------------------------------------------------------------------------------------------------------|
+| field        | `String` | A string representing the selector used in the `ng-messages` condition block, so the form, the field and the error type   |
+| errorType    | `String` | A string representing the type of error you are going to check, so the one used in the `ng-message` block                 |
+| errorMessage | `String` | A string representing the error message you are expecting to see associated to that field in case of that error type      |
+
+#### Returns
+
+- `protractor.promise` A promise which holds two booleans (or one) that represent if the error message is displayed, and eventually if the error message is the same as the expected one 
+
+#### Example
+
+```javascript
+protractor.checkErrorValidation('formName.fieldName.$error', 'maxlength', 'The maximum length is 9').then(data => {
+  // data holds two booleans, the first one is if the maxlength error is displayed for the fieldName, and the second is if the displayed error is equal to "The Maximum length is 9"
+});
 ```
 
 <hr>

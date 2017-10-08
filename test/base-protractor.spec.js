@@ -91,6 +91,7 @@ describe('Base Protractor Tests', function() {
         it('should check that the ng-maxlength error is not displayed', () => {
             let expectedResults = [false];
             setInputValueForError('12345', expectationFn);
+
             function expectationFn() {
                 return protractor.checkErrorValidation(field, maxLengthErrorType).then(
                     (data) => expect(data).toEqual(expectedResults)
