@@ -1,6 +1,6 @@
 {
   "name": "qprotractor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An utility library for protractor providing several utility methods which extend the ElementFinder, the ElementArrayFinder and the protractor objects",
   "main": "index.js",
   "scripts": {
