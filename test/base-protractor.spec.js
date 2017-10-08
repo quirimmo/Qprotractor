@@ -1,4 +1,4 @@
-fdescribe('Base Protractor Tests', function() {
+describe('Base Protractor Tests', function() {
 
     beforeEach(() => {
         browser.get('/');
@@ -54,7 +54,7 @@ fdescribe('Base Protractor Tests', function() {
         });
     });
 
-    fdescribe('checkErrorValidation', () => {
+    describe('checkErrorValidation', () => {
         const field = 'fromQprotractor.validationErrorField.$error';
         const maxLengthErrorType = 'maxlength';
         const maxLengthErrorMessage = 'Use maximum 9 digits';

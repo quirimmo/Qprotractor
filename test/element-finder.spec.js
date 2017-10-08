@@ -1,6 +1,6 @@
 describe('ElementFinder Tests', function() {
 
-    beforeAll(function() {
+    beforeEach(function() {
         browser.get('/');
     });
 
@@ -136,6 +136,25 @@ describe('ElementFinder Tests', function() {
             element(by.id('tick-by-container')).clickOnParent().then(
                 expect(element(by.id('tick-by-container')).getCheckedValue()).toEqual('true')
             );
+        });
+
+    });
+
+    describe('isDisplayedIfPresent', () => {
+
+        it('should return false if the element is not present', () => {
+            let notPresentElement = element(by.id('not-present-element'));
+            expect(notPresentElement.isDisplayedIfPresent()).toEqual(false);
+        });
+
+        it('should return false if the element is present but not displayed', () => {
+            let presentHiddenElement = element(by.id('present-hidden-element'));
+            expect(presentHiddenElement.isDisplayedIfPresent()).toEqual(false);
+        });
+
+        it('should return true if the element is present and displayed', () => {
+            let username = element(by.id('username'));
+            expect(username.isDisplayedIfPresent()).toEqual(true);
         });
 
     });
