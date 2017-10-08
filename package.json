@@ -9,11 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quirimmo/Qprotractor.git"
+    "url": "https://github.com/quirimmo/Qprotractor.git"
   },
   "keywords": [
     "qprotractor",
+    "e2e tests",
     "protractor",
+    "protractor e2e tests",
+    "AngularJs e2e tests",
+    "AngularJs protractor",
+    "protractor qprotractor",
+    "protractor javascript",
+    "protractor helper methods",
     "angular protractor utilities",
     "e2e protractor utilities",
     "protractor utilities",

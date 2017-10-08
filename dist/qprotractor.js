@@ -356,11 +356,11 @@ function ifPresentAndEnabledDoAction(elementToCheck, actionToDo) {
 
 
 /**
- * 
- * @param {String} field 
- * @param {String} errorType 
- * @param {String} [errorMessage] Optional. 
- * @returns {Protractor.promise}
+ * Check if the given field, displays the given error type, and eventually check that the message text is the same as the one you provided
+ * @param {String} field Complete field name associated to the ng-messages. It is the field of the form you are going to check the validation
+ * @param {String} errorType Type of the error that will be shown in the ng-message block 
+ * @param {String} [errorMessage] Optional. Text of the error message that should be displayed when you have the error
+ * @returns {Protractor.promise} A promise which holds booleans which represent if the error is shown and eventually if the message is the same as the expected one
  */
 function checkErrorValidation(field, errorType, errorMessage) {
     var el = $('[ng-messages="' + field + '"] [ng-message="' + errorType + '"]');
