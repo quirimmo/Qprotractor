@@ -4,6 +4,14 @@ describe('Base Protractor Tests', function() {
         browser.get('/');
     });
 
+    fdescribe('getFirstPresentElement', () => {
+        it('should return the first present element', () => {
+            // protractor.getFirstPresentElement([element(by.id('a')), element(by.id('marital-status')), element(by.id('b'))]);
+            var el = protractor.getFirstPresentElement([element(by.id('marital-status')), element(by.id('b'))]);
+            console.log(el);
+        });
+    });
+
     describe('getLabelTextByForAttribute', () => {
         it('should select the label text through the for value', () => {
             expect(protractor.getLabelTextByForAttribute('disabled-field')).toEqual('Disabled Field:');

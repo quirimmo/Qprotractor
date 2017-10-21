@@ -22,6 +22,7 @@ protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLab
 protractor.ElementArrayFinder.prototype.sort = sort;
 protractor.ElementArrayFinder.prototype.getTableRowsFromCSSColumnsValues = getTableRowsFromCSSColumnsValues;
 
+protractor.getFirstPresentElement = getFirstPresentElement;
 protractor.checkErrorValidation = checkErrorValidation;
 protractor.ifPresentAndEnabledDoAction = ifPresentAndEnabledDoAction;
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
@@ -237,6 +238,23 @@ function sort(compareFunction, functionName, inputParams) {
 
 // protractor methods
 // ===========================================================================================
+
+function getFirstPresentElement(elements) {
+    // var elementToReturn;
+    // elements.some(asyncPlugin(function(el) {
+    //     var isPresent = awaitPlugin(el.isPresent());
+    //     if (isPresent) {
+    //         elementToReturn = el;
+    //         console.log('entered');
+    //     }
+    //     return isPresent;
+    // }));
+    return elements.find(asyncPlugin(function(el) {
+        return awaitPlugin(el.isPresent());
+    }));
+
+    // return elementToReturn;
+}
 
 
 /**
