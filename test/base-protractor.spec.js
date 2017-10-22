@@ -6,9 +6,13 @@ describe('Base Protractor Tests', function() {
 
     fdescribe('getFirstPresentElement', () => {
         it('should return the first present element', () => {
-            // protractor.getFirstPresentElement([element(by.id('a')), element(by.id('marital-status')), element(by.id('b'))]);
-            var el = protractor.getFirstPresentElement([element(by.id('marital-status')), element(by.id('b'))]);
+            // var el = protractor.getFirstPresentElement([element(by.id('a')), element(by.id('marital-status')), element(by.id('b'))]);
+            
+            var el = protractor.getFirstPresentElement([element(by.id('marital-status')), element(by.id('a')), element(by.id('b'))]);
             console.log(el);
+            // el.isPresent().then((isPresent) => {
+            //     console.log(isPresent);
+            // });
         });
     });
 

@@ -249,9 +249,29 @@ function getFirstPresentElement(elements) {
     //     }
     //     return isPresent;
     // }));
-    return elements.find(asyncPlugin(function(el) {
-        return awaitPlugin(el.isPresent());
-    }));
+
+    // return elements.filter(asyncPlugin(function(el) {
+    //     return awaitPlugin(el.isPresent()) === true;
+    // }))[0];
+    // asyncPlugin(test());
+    
+    // function test() {
+    //     return 'AAAA';
+    // }    
+
+    // const comparableArray = awaitPlugin(elements.map(asyncPlugin(x => [awaitPlugin(x[functionName].apply(x, inputParams)), x])));
+
+    asyncPlugin(function() {
+        const comparableArray = elements.map(asyncPlugin(x => [awaitPlugin(x.isPresent()), x]));
+        console.log(comparableArray);
+        return comparableArray;
+    });
+    
+    
+
+
+    // comparableArray.sort(compareFunction);
+    // const sortedArray = comparableArray.map(x => x[1]);
 
     // return elementToReturn;
 }
