@@ -22,6 +22,7 @@ protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLab
 protractor.ElementArrayFinder.prototype.sort = sort;
 protractor.ElementArrayFinder.prototype.getTableRowsFromCSSColumnsValues = getTableRowsFromCSSColumnsValues;
 
+protractor.getFirstPresentElement = getFirstPresentElement;
 protractor.checkErrorValidation = checkErrorValidation;
 protractor.ifPresentAndEnabledDoAction = ifPresentAndEnabledDoAction;
 protractor.getLabelTextByForAttribute = getLabelTextByForAttribute;
@@ -237,6 +238,25 @@ function sort(compareFunction, functionName, inputParams) {
 
 // protractor methods
 // ===========================================================================================
+
+/**
+ * @description
+ * A method in order to get the first present element within a list of ElementFinder items 
+ * 
+ * @param {Array} elements An array of ElementFinder items 
+ * @returns {protractor.promise} A promise resolved which holds the first present element of the array, undefined otherwise
+ */
+function getFirstPresentElement(elements) {
+    let deferred = protractor.promise.defer();
+    asyncPlugin(asyncFn)();
+    return deferred.promise;
+
+    function asyncFn() {
+        let elementsPresences = elements.map(x => [awaitPlugin(x.isPresent()), x]);
+        let firstVisibleElement = elementsPresences.find(x => x[0] === true)[1];
+        deferred.fulfill(firstVisibleElement);
+    }
+}
 
 
 /**
