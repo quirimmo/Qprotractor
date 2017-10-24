@@ -37,6 +37,7 @@ An utility library for protractor providing several utility methods which extend
     * [setSelectValueByOptionText(optionText[, elementContainer])](#set-select-value-by-option-text)
     * [ifPresentAndEnabledDoAction(elementToCheck, actionToDo)](#if-present-and-enabled-do-action)
     * [checkErrorValidation(field, errorType[, errorMessage])](#check-error-validation)
+    * [getFirstPresentElement(elements)](#get-first-present-element)
 * [Developer Usage](#developer-usage)
 
 <hr>
@@ -557,6 +558,28 @@ Check if the given field presents the given error type, and eventually if the er
 ```javascript
 protractor.checkErrorValidation('formName.fieldName.$error', 'maxlength', 'The maximum length is 9').then(data => {
   // data holds two booleans, the first one is if the maxlength error is displayed for the fieldName, and the second is if the displayed error is equal to "The Maximum length is 9"
+});
+```
+
+### <a id="get-first-present-element"></a>getFirstPresentElement(elements)
+
+Get the first present element within a list of ElementFinder items
+
+#### Parameters
+
+| Name     | Type    | Description                                                                                                        |
+|----------|---------|--------------------------------------------------------------------------------------------------------------------|
+| elements | `Array` | An Array representing let list of ElementFinder items where to look for the first one which is present in the page |
+
+#### Returns
+
+- `protractor.promise` A promise resolved which holds the first present element of the array, undefined otherwise
+
+#### Example
+
+```javascript
+protractor.getFirstPresentElement([element(by.id('a')), element(by.id('marital-status')), element(by.id('b'))]).then(() => {
+  // el is the first present element in the given list of ArrayFinder elements given as input
 });
 ```
 
