@@ -239,6 +239,13 @@ function sort(compareFunction, functionName, inputParams) {
 // protractor methods
 // ===========================================================================================
 
+/**
+ * @description
+ * A method in order to get the first present element within a list of ElementFinder items 
+ * 
+ * @param {Array} elements An array of ElementFinder items 
+ * @returns {protractor.promise} A promise resolved which holds the first present element of the array, undefined otherwise
+ */
 function getFirstPresentElement(elements) {
     let deferred = protractor.promise.defer();
     asyncPlugin(asyncFn)();
