@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp').controller('MainController', ['$scope', function($scope) {
+angular.module('myApp').controller('MainController', ['$scope', MainController]);
+
+
+function MainController($scope) {
 
     $scope.username = 'Username Value';
 
@@ -8,7 +11,6 @@ angular.module('myApp').controller('MainController', ['$scope', function($scope)
     $scope.maritalStatus = 'Single';
 
     $scope.dogsCheckbox = 'YES';
-
     $scope.genderRadio = 'Male';
 
     $scope.disabledField = 'I am a disabled field';
@@ -17,7 +19,6 @@ angular.module('myApp').controller('MainController', ['$scope', function($scope)
     $scope.hiddenField = 'Hidden field';
 
     $scope.liveInMyCountry = undefined;
-
     $scope.tickByContainer = undefined;
 
     $scope.tableData = [
@@ -41,4 +42,4 @@ angular.module('myApp').controller('MainController', ['$scope', function($scope)
         }
     ];
 
-}]);
+}

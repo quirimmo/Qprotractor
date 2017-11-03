@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp')
+angular.module('myApp').config(['$stateProvider', '$urlRouterProvider', configFunction]);
 
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+function configFunction($stateProvider, $urlRouterProvider) {
     let mainState = {
         name: 'main',
         url: '/main',
@@ -12,4 +12,4 @@ angular.module('myApp')
 
     $stateProvider.state(mainState);
     $urlRouterProvider.otherwise('main');
-}]);
+}
