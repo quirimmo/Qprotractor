@@ -107,16 +107,19 @@ function clearAndSetInputValue(value) {
 /**
  * Set a new value on an input ElementFinder if it is enabled, otherwise proceed without setting the value
  * @param {value} value The new value to set in the ElementFinder if it is enabled  
+ * @param {Boolean} [clearAndSet] Specify if use the clear and set or just the set. True by default. Pass false in order to avoid to clear the field before.  
  * @returns {protractor.promise} A promise resolved when the input ElementFinder will be clear and the new value will be set in, if it is enabled. Otherwise it will be fulfilled if the ElementFinder is not enabled.
  */
-function setValueIfEnabledOrProceed(value) {
+function setValueIfEnabledOrProceed(value, clearAndSet) {
+    clearAndSet = clearAndSet || true;
+    let fnToExecute = clearAndSet ? this.clearAndSetInputValue.bind(this, value) : this.setInputValue.bind(this, value);
     return this.isEnabled()
         .then(onIsFieldEnabled.bind(this, value))
         .catch(protractor.onCatchGenericError);
 
     function onIsFieldEnabled(valueToSet, isEnabled) {
         return isEnabled ?
-            this.clearAndSetInputValue(valueToSet) :
+            fnToExecute() :
             protractor.promise.defer().fulfill();
     }
 }
@@ -213,9 +216,9 @@ function getLabelTextOfRadioSelectedItem() {
  */
 function getTableRowsFromCSSColumnsValues(columnClassesArray) {
     let promises;
-    return this.map(function(tr) {
+    return this.map(function (tr) {
         promises = [];
-        columnClassesArray.forEach(function(columnClass) {
+        columnClassesArray.forEach(function (columnClass) {
             promises.push(tr.element(by.className(columnClass)).getText());
         });
         return promises;
@@ -239,6 +242,13 @@ function sort(compareFunction, functionName, inputParams) {
 // protractor methods
 // ===========================================================================================
 
+/**
+ * @description
+ * A method in order to get the first present element within a list of ElementFinder items 
+ * 
+ * @param {Array} elements An array of ElementFinder items 
+ * @returns {protractor.promise} A promise resolved which holds the first present element of the array, undefined otherwise
+ */
 function getFirstPresentElement(elements) {
     let deferred = protractor.promise.defer();
     asyncPlugin(asyncFn)();
@@ -268,8 +278,8 @@ function getLabelTextByForAttribute(forValue) {
  * @returns {protractor.ElementArrayFinder} The ElementArrayFinder associated to the given array of ElementFinder items
  */
 function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
-    let getWebElements = function() {
-        let webElements = arrayOfElementFinder.map(function(ef) {
+    let getWebElements = function () {
+        let webElements = arrayOfElementFinder.map(function (ef) {
             return ef.getWebElement();
         });
         return protractor.promise.fulfilled(webElements);
