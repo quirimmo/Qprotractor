@@ -111,7 +111,7 @@ function clearAndSetInputValue(value) {
  * @returns {protractor.promise} A promise resolved when the input ElementFinder will be clear and the new value will be set in, if it is enabled. Otherwise it will be fulfilled if the ElementFinder is not enabled.
  */
 function setValueIfEnabledOrProceed(value, clearAndSet) {
-    clearAndSet = clearAndSet || true;
+    clearAndSet = clearAndSet ? false : true;
     let fnToExecute = clearAndSet ? this.clearAndSetInputValue.bind(this, value) : this.setInputValue.bind(this, value);
     return this.isEnabled()
         .then(onIsFieldEnabled.bind(this, value))
