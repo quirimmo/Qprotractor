@@ -1,3 +1,4 @@
 protractor.config.js
 gulpfile.js
 sample/
+.npmrc
