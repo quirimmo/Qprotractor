@@ -201,9 +201,10 @@ Set a new value on an input ElementFinder if it is enabled, otherwise proceed wi
 
 #### Parameters
 
-| Name  | Type    | Description                                                |
-|-------|---------|------------------------------------------------------------|
-| value | `value` | The new value to set in the ElementFinder if it is enabled |
+| Name    | Type          | Description                                                                    |
+|---------|---------------|--------------------------------------------------------------------------------|
+| value   | `value`       | The new value to set in the ElementFinder if it is enabled                     |
+| Boolean | `clearAndSet` | Optional. Pass false if you want just to set without clearing the field before |
 
 #### Returns
 
