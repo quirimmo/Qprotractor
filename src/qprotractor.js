@@ -112,14 +112,14 @@ function clearAndSetInputValue(value) {
  */
 function setValueIfEnabledOrProceed(value, clearAndSet) {
     clearAndSet = clearAndSet || true;
-    let fnToExecute = clearAndSet ? this.clearAndSetInputValue : this.setInputValue;
+    let fnToExecute = clearAndSet ? this.clearAndSetInputValue.bind(this, value) : this.setInputValue.bind(this, value);
     return this.isEnabled()
         .then(onIsFieldEnabled.bind(this, value))
         .catch(protractor.onCatchGenericError);
 
     function onIsFieldEnabled(valueToSet, isEnabled) {
         return isEnabled ?
-            fnToExecute(valueToSet) :
+            fnToExecute() :
             protractor.promise.defer().fulfill();
     }
 }
