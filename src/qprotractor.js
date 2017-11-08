@@ -15,7 +15,7 @@ protractor.ElementFinder.prototype.isEnabledIfDisplayedOrProceed = isEnabledIfDi
 protractor.ElementFinder.prototype.waitAndThenExecute = waitAndThenExecute;
 protractor.ElementFinder.prototype.clickOnParent = clickOnParent;
 protractor.ElementFinder.prototype.isDisplayedIfPresent = isDisplayedIfPresent;
-
+protractor.ElementFinder.prototype.isEnabledAndPresent = isEnabledAndPresent;
 
 protractor.ElementArrayFinder.prototype.getValueOfRadioSelectedItem = getValueOfRadioSelectedItem;
 protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLabelTextOfRadioSelectedItem;
@@ -159,6 +159,16 @@ function isDisplayedIfPresent() {
     }
 }
 
+/**
+ * Check if an element is enabled whether is present. If not present, return a promise which holds false
+ * @returns {Protractor.promise} A promise which holds if the element is enabled, otherwise holds false if not present
+*/
+function isEnabledAndPresent() {
+    return this.isEnabled()
+        .then(isEnabled => isEnabled)
+        .catch(() => false);
+}
+
 
 /**
  * Wait for an ElementFinder to be present in a given delay, and if present then execute the provided function, otherwise reject with an error
@@ -215,9 +225,9 @@ function getLabelTextOfRadioSelectedItem() {
  */
 function getTableRowsFromCSSColumnsValues(columnClassesArray) {
     let promises;
-    return this.map(function (tr) {
+    return this.map(function(tr) {
         promises = [];
-        columnClassesArray.forEach(function (columnClass) {
+        columnClassesArray.forEach(function(columnClass) {
             promises.push(tr.element(by.className(columnClass)).getText());
         });
         return promises;
@@ -277,8 +287,8 @@ function getLabelTextByForAttribute(forValue) {
  * @returns {protractor.ElementArrayFinder} The ElementArrayFinder associated to the given array of ElementFinder items
  */
 function getElementArrayFinderFromArrayOfElementFinder(arrayOfElementFinder) {
-    let getWebElements = function () {
-        let webElements = arrayOfElementFinder.map(function (ef) {
+    let getWebElements = function() {
+        let webElements = arrayOfElementFinder.map(function(ef) {
             return ef.getWebElement();
         });
         return protractor.promise.fulfilled(webElements);
