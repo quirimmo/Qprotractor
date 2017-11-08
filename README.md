@@ -23,6 +23,7 @@ An utility library for protractor providing several utility methods which extend
     * [isEnabledIfDisplayedOrProceed(isEnabledIfNotDisplayed)](#is-enabled-if-displayed-or-proceed)
     * [waitAndThenExecute(maxWaitTime, fnToExecute)](#wait-and-then-execute)
     * [isDisplayedIfPresent()](#is-displayed-if-present)
+    * [isEnabledAndPresent()](#is-enabled-and-present)
   * [ElementArrayFinder methods](#element-array-finder-methods)
     * [getValueOfRadioSelectedItem()](#get-value-of-radio-selected-item)
     * [getLabelTextOfRadioSelectedItem()](#get-label-text-of-radio-selected-item)
@@ -289,6 +290,31 @@ el.isDisplayedIfPresent().then(onDisplayedIfPresent);
 function onDisplayedIfPresent(isDisplayed) {
   // false if the element is not present or present but not displayed
   // true if the element is present and displayed
+}
+```
+
+### <a id="is-enabled-and-present"></a>isDisplayedAndPresent()
+
+Check if an element is enabled whether is present. If not present, return a promise which holds false
+
+#### Parameters
+
+| Name        | Type       | Description                                                                    |
+|-------------|------------|--------------------------------------------------------------------------------|
+
+#### Returns
+
+- `protractor.promise`  A promise which holds if the element is enabled, otherwise holds false if not present
+
+#### Example
+
+```javascript
+let el = element(by.id('my-id'));
+el.isEnabledAndPresent().then(onEnabledAndPresent);
+
+function onEnabledAndPresent(isEnabledAndPresent) {
+  // isEnabledAndPresent if the element is not present or present but not enabled
+  // true if the element is present and enabled
 }
 ```
 
