@@ -297,11 +297,6 @@ function onDisplayedIfPresent(isDisplayed) {
 
 Check if an element is enabled whether is present. If not present, return a promise which holds false
 
-#### Parameters
-
-| Name        | Type       | Description                                                                    |
-|-------------|------------|--------------------------------------------------------------------------------|
-
 #### Returns
 
 - `protractor.promise`  A promise which holds if the element is enabled, otherwise holds false if not present
@@ -338,17 +333,26 @@ element.all(by.model('my-radio-model')).getValueOfRadioSelectedItem().then(value
 
 ### <a id="get-label-text-of-radio-selected-item"></a>getLabelTextOfRadioSelectedItem()
 
-Get the text of the label of the checked option of a radio input. Called on the ElementArrayFinder associated to all the elements of the radio input
+Get the text of the label of the checked option of a radio input. And specify if you want to return an empty string or an error in case no element is selected.
+Called on the ElementArrayFinder associated to all the elements of the radio input.
+
+#### Parameters
+
+| Name              | Type       | Description                                                                                                     |
+|-------------------|------------|-----------------------------------------------------------------------------------------------------------------|
+| ifEmptyThrowError | `boolean`  | Optional. Specify if you need to throw an error if the radio has not element selected or return an empty string |
 
 #### Returns
 
-- `protractor.promise`  A promise which holds the text of the checked option of radio inputs, otherwise it is rejected with an error
+- `protractor.promise`  A promise which holds the text of the checked option of radio inputs, eventually empty value if specified through the parameter, otherwise it is rejected with an error
 
 #### Example
 
 ```javascript
-element.all(by.model('my-radio-model')).getValueOfRadioSelectedItem().then(value => {
+element.all(by.model('my-radio-model')).getLabelTextOfRadioSelectedItem(false).then(value => {
   // value is the value of the selected radio item associated to radio input elements selected by the selector by the model my-radio-model
+  // passing false, it returns an empty string if the radio has not been selected
+  // passing true it returns an error
 });
 ```
 

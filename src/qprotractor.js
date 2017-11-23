@@ -204,16 +204,22 @@ function getValueOfRadioSelectedItem() {
 
 /**
  * Get the text of the label of the checked option of a radio input. Called on the ElementArrayFinder associated to all the elements of the radio input 
+ * @param {Boolean} [ifEmptyThrowError] Optional. Specify if you need to throw an error if the radio has not element selected or return an empty string
  * @returns {protractor.promise} A promise which holds the text of the checked option of radio inputs, otherwise it is rejected with an error
  */
-function getLabelTextOfRadioSelectedItem() {
+function getLabelTextOfRadioSelectedItem(ifEmptyThrowError = false) {
     return this.filter(filterElementByAttributeChecked)
         .then((els) => {
             return els[0].getIdValue()
                 .then(protractor.getLabelTextByForAttribute)
                 .catch(onCatchGenericError);
         })
-        .catch(onCatchGenericError);
+        .catch((error) => {
+            if (ifEmptyThrowError === false){ 
+                return '';
+            }
+            onCatchGenericError(error);
+        });
 }
 
 

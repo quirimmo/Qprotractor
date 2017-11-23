@@ -57,6 +57,11 @@ describe('ElementArrayFinder Tests', function() {
             expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('I am a Male');
         });
 
+        it('should return an empty string if nothing is selected', function() {
+            let genderRadios = element.all(by.model('radioChoice'));
+            expect(genderRadios.getLabelTextOfRadioSelectedItem()).toEqual('');
+        });
+
     });
 
     describe('getTableRowsFromCSSColumnsValues', function() {
