@@ -204,7 +204,7 @@ function getValueOfRadioSelectedItem() {
 
 /**
  * Get the text of the label of the checked option of a radio input. Called on the ElementArrayFinder associated to all the elements of the radio input 
- * @param {Boolean} [ifEmptyThrowError] Optional. Specified if you need to throw an error if the radio has not element selected or return an empty string
+ * @param {Boolean} [ifEmptyThrowError] Optional. Specify if you need to throw an error if the radio has not element selected or return an empty string
  * @returns {protractor.promise} A promise which holds the text of the checked option of radio inputs, otherwise it is rejected with an error
  */
 function getLabelTextOfRadioSelectedItem(ifEmptyThrowError = false) {
