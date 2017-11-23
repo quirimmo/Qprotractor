@@ -26,7 +26,7 @@ An utility library for protractor providing several utility methods which extend
     * [isEnabledAndPresent()](#is-enabled-and-present)
   * [ElementArrayFinder methods](#element-array-finder-methods)
     * [getValueOfRadioSelectedItem()](#get-value-of-radio-selected-item)
-    * [getLabelTextOfRadioSelectedItem()](#get-label-text-of-radio-selected-item)
+    * [getLabelTextOfRadioSelectedItem(ifEmptyThrowError)](#get-label-text-of-radio-selected-item)
     * [getTableRowsFromCSSColumnsValues(columnClassesArray)](#get-table-rows-from-css-columns-values)
     * [sort(compareFunction, functionName, inputParams)](#sort)
   * [protractor methods](#protractor-methods)
@@ -331,7 +331,7 @@ element.all(by.model('my-radio-model')).getValueOfRadioSelectedItem().then(value
 });
 ```
 
-### <a id="get-label-text-of-radio-selected-item"></a>getLabelTextOfRadioSelectedItem()
+### <a id="get-label-text-of-radio-selected-item"></a>getLabelTextOfRadioSelectedItem(ifEmptyThrowError)
 
 Get the text of the label of the checked option of a radio input. And specify if you want to return an empty string or an error in case no element is selected.
 Called on the ElementArrayFinder associated to all the elements of the radio input.
