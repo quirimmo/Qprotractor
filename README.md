@@ -328,15 +328,13 @@ Check if an element is an input tag of the given type
 
 #### Returns
 
-- `protractor.promise` A promise which holds true or false depending if the tag is the given input type or not
+- `Boolean` True or false depending if the tag is the given input type or not
 
 #### Example
 
 ```javascript
 let el = element(by.id('my-id'));
-el.isTagInputType('checkbox').then((value) => {
-  // value holds true if el is an input checkbox, or false otherwise
-});
+var isCheckbox = el.isTagInputType('checkbox'); // holds true if el is a checkbox input, or false otherwise
 ```
 
 ### <a id="is-radio-input"></a>isRadioInput()
@@ -345,15 +343,13 @@ Check if an element is a radio input tag
 
 #### Returns
 
-- `protractor.promise` A promise which holds true or false depending if the tag is a radio input or not
+- `Boolean` True or false depending if the tag is a radio input or not
 
 #### Example
 
 ```javascript
 let el = element(by.id('my-id'));
-el.isRadioInput().then((value) => {
-  // value holds true if the el is a radio input, otherwise false
-});
+var isRadio = el.isRadioInput(); // holds true if el is a radio input, or false otherwise
 ```
 
 ### <a id="is-checkbox-input"></a>isCheckboxInput()
@@ -362,15 +358,13 @@ Check if an element is a checkbox input tag
 
 #### Returns
 
-- `protractor.promise` A promise which holds true or false depending if the tag is a checkbox input or not
+- `Boolean` True or false depending if the tag is a checkbox input or not
 
 #### Example
 
 ```javascript
 let el = element(by.id('my-id'));
-el.isCheckboxInput().then((value) => {
-  // value holds true if the el is a checkbox input, otherwise false
-});
+let isRadio = el.isCheckboxInput(); // holds true if el is a checkbox input, or false otherwise
 ```
 
 ## <a id="element-array-finder-methods"></a>ElementArrayFinder Methods
