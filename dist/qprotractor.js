@@ -186,6 +186,11 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
         .catch(onCatchGenericError);
 }
 
+/**
+ * Return if an element is an input tag of the given type
+ * @param {String} inputType The input type to check for the tag element 
+ * @returns {protractor.promise} A promise which holds true or false depending if the tag is the given input type or not 
+ */
 function isTagInputType(inputType) {
     return this.getTagName()
     .then(onElementTagName.bind(this))
@@ -207,6 +212,10 @@ function isRadioInput() {
     return this.isTagInputType('radio');
 }
 
+/**
+ * Return if an element is an input checkbox tag
+ * @returns {protractor.promise} A promise which holds true or false depending if the tag is a checkbox button or not 
+ */
 function isCheckboxInput() {
     return this.isTagInputType('checkbox');
 }
