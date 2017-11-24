@@ -16,6 +16,7 @@ protractor.ElementFinder.prototype.waitAndThenExecute = waitAndThenExecute;
 protractor.ElementFinder.prototype.clickOnParent = clickOnParent;
 protractor.ElementFinder.prototype.isDisplayedIfPresent = isDisplayedIfPresent;
 protractor.ElementFinder.prototype.isEnabledAndPresent = isEnabledAndPresent;
+protractor.ElementFinder.prototype.isTagSelect = isTagSelect;
 protractor.ElementFinder.prototype.isTagInputType = isTagInputType;
 protractor.ElementFinder.prototype.isRadioInput = isRadioInput;
 protractor.ElementFinder.prototype.isCheckboxInput = isCheckboxInput;
@@ -184,6 +185,19 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
     return browser.wait(EC.visibilityOf(this), maxWaitTime)
         .then(fnToExecute.bind(this))
         .catch(onCatchGenericError);
+}
+
+/**
+ * Return if an element is a select tag
+ * @returns {Boolean} True or false depending if the tag is a select or not 
+ */
+function isTagSelect() {
+    return asyncPlugin (asyncFn.bind(this))();
+
+    function asyncFn() {
+        let tag = awaitPlugin(this.getTagName());
+        return tag === 'select';
+    }
 }
 
 /**

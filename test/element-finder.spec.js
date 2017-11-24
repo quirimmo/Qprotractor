@@ -4,6 +4,18 @@ describe('ElementFinder Tests', () => {
         browser.get('/');
     });
 
+    describe('isTagSelect', () => {
+        it('should return true if the element is a select', () => {
+            let selectField = element(by.id('marital-status'));
+            expect(selectField.isTagSelect()).toEqual(true);
+        });
+
+        it('should return false if the element is not a select', () => {
+            let textField = element(by.id('validation-error-field'));
+            expect(textField.isTagSelect()).toEqual(false);
+        });
+    });
+
     describe('isRadioInput', () => {
         it('should return true if the element is an input radio', () => {
             let female = element(by.id('gender-female'));
