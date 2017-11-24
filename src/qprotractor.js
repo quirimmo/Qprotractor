@@ -16,6 +16,9 @@ protractor.ElementFinder.prototype.waitAndThenExecute = waitAndThenExecute;
 protractor.ElementFinder.prototype.clickOnParent = clickOnParent;
 protractor.ElementFinder.prototype.isDisplayedIfPresent = isDisplayedIfPresent;
 protractor.ElementFinder.prototype.isEnabledAndPresent = isEnabledAndPresent;
+protractor.ElementFinder.prototype.isTagInputType = isTagInputType;
+protractor.ElementFinder.prototype.isRadioInput = isRadioInput;
+protractor.ElementFinder.prototype.isCheckboxInput = isCheckboxInput;
 
 protractor.ElementArrayFinder.prototype.getValueOfRadioSelectedItem = getValueOfRadioSelectedItem;
 protractor.ElementArrayFinder.prototype.getLabelTextOfRadioSelectedItem = getLabelTextOfRadioSelectedItem;
@@ -183,6 +186,39 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
         .catch(onCatchGenericError);
 }
 
+/**
+ * Return if an element is an input tag of the given type
+ * @param {String} inputType The input type to check for the tag element 
+ * @returns {protractor.promise} A promise which holds true or false depending if the tag is the given input type or not 
+ */
+function isTagInputType(inputType) {
+    return this.getTagName()
+    .then(onElementTagName.bind(this))
+    .catch(onCatchGenericError);
+
+    function onElementTagName(tagName) {
+        if (tagName !== 'input') {
+            return false;
+        }
+        return this.getAttribute('type').then(tagAttribute => tagAttribute === inputType);
+    }
+}
+
+/**
+ * Return if an element is an input radio tag
+ * @returns {protractor.promise} A promise which holds true or false depending if the tag is a radio button or not 
+ */
+function isRadioInput() {
+    return this.isTagInputType('radio');
+}
+
+/**
+ * Return if an element is an input checkbox tag
+ * @returns {protractor.promise} A promise which holds true or false depending if the tag is a checkbox button or not 
+ */
+function isCheckboxInput() {
+    return this.isTagInputType('checkbox');
+}
 
 
 // ElementArrayFinder methods
