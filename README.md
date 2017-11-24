@@ -24,6 +24,9 @@ An utility library for protractor providing several utility methods which extend
     * [waitAndThenExecute(maxWaitTime, fnToExecute)](#wait-and-then-execute)
     * [isDisplayedIfPresent()](#is-displayed-if-present)
     * [isEnabledAndPresent()](#is-enabled-and-present)
+    * [isTagInputType(inputType)](#is-tag-input-type)
+    * [isRadioInput()](#is-radio-input)
+    * [isCheckboxInput()](#is-checkbox-input)
   * [ElementArrayFinder methods](#element-array-finder-methods)
     * [getValueOfRadioSelectedItem()](#get-value-of-radio-selected-item)
     * [getLabelTextOfRadioSelectedItem(ifEmptyThrowError)](#get-label-text-of-radio-selected-item)
@@ -311,6 +314,63 @@ function onEnabledAndPresent(isEnabledAndPresent) {
   // isEnabledAndPresent if the element is not present or present but not enabled
   // true if the element is present and enabled
 }
+```
+
+### <a id="is-tag-input-type"></a>isTagInputType(inputType)
+
+Check if an element is an input tag of the given type
+
+#### Parameters
+
+| Name      | Type     | Description                                 |
+|-----------|----------|---------------------------------------------|
+| inputType | `String` | The input type to check for the tag element |
+
+#### Returns
+
+- `protractor.promise` A promise which holds true or false depending if the tag is the given input type or not
+
+#### Example
+
+```javascript
+let el = element(by.id('my-id'));
+el.isTagInputType('checkbox').then((value) => {
+  // value holds true if el is an input checkbox, or false otherwise
+});
+```
+
+### <a id="is-radio-input"></a>isRadioInput()
+
+Check if an element is a radio input tag
+
+#### Returns
+
+- `protractor.promise` A promise which holds true or false depending if the tag is a radio input or not
+
+#### Example
+
+```javascript
+let el = element(by.id('my-id'));
+el.isRadioInput().then((value) => {
+  // value holds true if the el is a radio input, otherwise false
+});
+```
+
+### <a id="is-checkbox-input"></a>isCheckboxInput()
+
+Check if an element is a checkbox input tag
+
+#### Returns
+
+- `protractor.promise` A promise which holds true or false depending if the tag is a checkbox input or not
+
+#### Example
+
+```javascript
+let el = element(by.id('my-id'));
+el.isCheckboxInput().then((value) => {
+  // value holds true if the el is a checkbox input, otherwise false
+});
 ```
 
 ## <a id="element-array-finder-methods"></a>ElementArrayFinder Methods
