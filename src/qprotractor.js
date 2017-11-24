@@ -165,7 +165,7 @@ function isDisplayedIfPresent() {
 /**
  * Check if an element is enabled whether is present. If not present, return a promise which holds false
  * @returns {Protractor.promise} A promise which holds if the element is enabled, otherwise holds false if not present
-*/
+ */
 function isEnabledAndPresent() {
     return this.isEnabled()
         .then(isEnabled => isEnabled)
@@ -189,24 +189,24 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
 /**
  * Return if an element is an input tag of the given type
  * @param {String} inputType The input type to check for the tag element 
- * @returns {protractor.promise} A promise which holds true or false depending if the tag is the given input type or not 
+ * @returns {Boolean} True or false depending if the tag is of the given input type or not 
  */
 function isTagInputType(inputType) {
-    return this.getTagName()
-    .then(onElementTagName.bind(this))
-    .catch(onCatchGenericError);
+    return asyncPlugin (asyncFn.bind(this))();
 
-    function onElementTagName(tagName) {
-        if (tagName !== 'input') {
+    function asyncFn() {
+        let tag = awaitPlugin(this.getTagName());
+        if (tag !== 'input') {
             return false;
-        }
-        return this.getAttribute('type').then(tagAttribute => tagAttribute === inputType);
+        } 
+        let tagInputType = awaitPlugin(this.getAttribute('type'));
+        return tagInputType === inputType;
     }
 }
 
 /**
  * Return if an element is an input radio tag
- * @returns {protractor.promise} A promise which holds true or false depending if the tag is a radio button or not 
+ * @returns {Boolean} True or false depending if the tag is a radio button or not 
  */
 function isRadioInput() {
     return this.isTagInputType('radio');
@@ -214,7 +214,7 @@ function isRadioInput() {
 
 /**
  * Return if an element is an input checkbox tag
- * @returns {protractor.promise} A promise which holds true or false depending if the tag is a checkbox button or not 
+ * @returns {Boolean} True or false depending if the tag is a checkbox button or not 
  */
 function isCheckboxInput() {
     return this.isTagInputType('checkbox');
@@ -251,7 +251,7 @@ function getLabelTextOfRadioSelectedItem(ifEmptyThrowError = false) {
                 .catch(onCatchGenericError);
         })
         .catch((error) => {
-            if (ifEmptyThrowError === false){ 
+            if (ifEmptyThrowError === false) {
                 return '';
             }
             onCatchGenericError(error);
