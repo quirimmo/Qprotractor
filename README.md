@@ -24,6 +24,7 @@ An utility library for protractor providing several utility methods which extend
     * [waitAndThenExecute(maxWaitTime, fnToExecute)](#wait-and-then-execute)
     * [isDisplayedIfPresent()](#is-displayed-if-present)
     * [isEnabledAndPresent()](#is-enabled-and-present)
+    * [isTagSelect()](#is-tag-select)
     * [isTagInputType(inputType)](#is-tag-input-type)
     * [isRadioInput()](#is-radio-input)
     * [isCheckboxInput()](#is-checkbox-input)
@@ -314,6 +315,22 @@ function onEnabledAndPresent(isEnabledAndPresent) {
   // isEnabledAndPresent if the element is not present or present but not enabled
   // true if the element is present and enabled
 }
+```
+
+
+### <a id="is-tag-select"></a>isTagSelect()
+
+Check if an element is a select tag
+
+#### Returns
+
+- `Boolean` True or false depending if the tag is a select
+
+#### Example
+
+```javascript
+let el = element(by.id('my-id'));
+var isSelect = el.isTagSelect(); // holds true if el is a checkbox input, or false otherwise
 ```
 
 ### <a id="is-tag-input-type"></a>isTagInputType(inputType)
