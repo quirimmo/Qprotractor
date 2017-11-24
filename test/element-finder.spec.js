@@ -4,13 +4,52 @@ describe('ElementFinder Tests', () => {
         browser.get('/');
     });
 
-    describe('getInputValue', () => {
+    describe('isRadioInput', () => {
+        it('should return true if the element is an input radio', () => {
+            let female = element(by.id('gender-female'));
+            expect(female.isRadioInput()).toEqual(true);
+        });
 
+        it('should return false if the element is an input but not a radio', () => {
+            let textField = element(by.id('validation-error-field'));
+            expect(textField.isRadioInput()).toEqual(false);
+        });
+    });
+
+    describe('isCheckboxInput', () => {
+        it('should return true if the element is an input checkbox', () => {
+            let dogs = element(by.id('dogs-checkbox'));
+            expect(dogs.isCheckboxInput()).toEqual(true);
+        });
+
+        it('should return false if the element is an input but not a checkbox', () => {
+            let textField = element(by.id('validation-error-field'));
+            expect(textField.isCheckboxInput()).toEqual(false);
+        });
+    });
+
+    describe('isTagInputType', () => {
+        it('should return true if the element is an input checkbox and you provide checkbox', () => {
+            let checkboxField = element(by.id('dogs-checkbox'));
+            expect(checkboxField.isTagInputType('checkbox')).toEqual(true);
+        });
+
+        it('should return true if the element is an input text and you provide text', () => {
+            let textField = element(by.id('validation-error-field'));
+            expect(textField.isTagInputType('text')).toEqual(true);
+        });
+
+        it('should return true if the element is an input radio and you provide radio', () => {
+            let radioField = element(by.id('gender-female'));
+            expect(radioField.isTagInputType('radio')).toEqual(true);
+        });
+    });
+
+    describe('getInputValue', () => {
         it('should get the value of an input field', () => {
             let username = element(by.model('username'));
             expect(username.getInputValue()).toEqual('Username Value');
         });
-
     });
 
     describe('setInputValue', () => {
