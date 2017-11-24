@@ -165,7 +165,7 @@ function isDisplayedIfPresent() {
 /**
  * Check if an element is enabled whether is present. If not present, return a promise which holds false
  * @returns {Protractor.promise} A promise which holds if the element is enabled, otherwise holds false if not present
-*/
+ */
 function isEnabledAndPresent() {
     return this.isEnabled()
         .then(isEnabled => isEnabled)
@@ -192,15 +192,15 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
  * @returns {protractor.promise} A promise which holds true or false depending if the tag is the given input type or not 
  */
 function isTagInputType(inputType) {
-    return this.getTagName()
-    .then(onElementTagName.bind(this))
-    .catch(onCatchGenericError);
+    return asyncPlugin (asyncFn.bind(this))();
 
-    function onElementTagName(tagName) {
-        if (tagName !== 'input') {
+    function asyncFn() {
+        let tag = awaitPlugin(this.getTagName());
+        if (tag !== 'input') {
             return false;
-        }
-        return this.getAttribute('type').then(tagAttribute => tagAttribute === inputType);
+        } 
+        let tagInputType = awaitPlugin(this.getAttribute('type'));
+        return tagInputType === inputType;
     }
 }
 
@@ -251,7 +251,7 @@ function getLabelTextOfRadioSelectedItem(ifEmptyThrowError = false) {
                 .catch(onCatchGenericError);
         })
         .catch((error) => {
-            if (ifEmptyThrowError === false){ 
+            if (ifEmptyThrowError === false) {
                 return '';
             }
             onCatchGenericError(error);
