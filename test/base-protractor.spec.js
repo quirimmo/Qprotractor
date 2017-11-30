@@ -109,4 +109,11 @@ describe('Base Protractor Tests', function() {
         });
     });
 
+    fdescribe('getFirstAvailableSelectValue', () => {
+        it('should', () => {
+            let select = element(by.id('marital-status'));
+            protractor.getFirstAvailableSelectValue(select);
+        });
+    });
+
 });

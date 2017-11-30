@@ -34,6 +34,7 @@ protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinder
 protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
 protractor.setRadioButtonValueByLabelText = setRadioButtonValueByLabelText;
 protractor.setSelectValueByOptionText = setSelectValueByOptionText;
+protractor.getFirstAvailableSelectValue = getFirstAvailableSelectValue;
 protractor.onCatchGenericError = onCatchGenericError;
 
 
@@ -192,7 +193,7 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
  * @returns {Boolean} True or false depending if the tag is a select or not 
  */
 function isTagSelect() {
-    return asyncPlugin (asyncFn.bind(this))();
+    return asyncPlugin(asyncFn.bind(this))();
 
     function asyncFn() {
         let tag = awaitPlugin(this.getTagName());
@@ -206,13 +207,13 @@ function isTagSelect() {
  * @returns {Boolean} True or false depending if the tag is of the given input type or not 
  */
 function isTagInputType(inputType) {
-    return asyncPlugin (asyncFn.bind(this))();
+    return asyncPlugin(asyncFn.bind(this))();
 
     function asyncFn() {
         let tag = awaitPlugin(this.getTagName());
         if (tag !== 'input') {
             return false;
-        } 
+        }
         let tagInputType = awaitPlugin(this.getAttribute('type'));
         return tagInputType === inputType;
     }
@@ -366,6 +367,50 @@ function filterElementByAttributeChecked(el) {
     function checkCheckedValue(value) {
         return value === 'true';
     }
+}
+
+function getFirstAvailableSelectValue(selectElement) {
+    const availableOptions = selectElement.all(by.tagName('option'));
+    let availableOption;
+    let BreakException = {};
+    asyncPlugin(asyncFn.bind(this))();
+
+    function asyncFn() {
+        const comparableArray = awaitPlugin(protractor.promise.all(availableOptions.map(asyncPlugin(x => [awaitPlugin(x.getText.bind(x)), x]))));
+        console.log(comparableArray);
+        // let firstAvailableNotEmptyText = comparableArray.some((el) => el !== '');
+        // console.log(firstAvailableNotEmptyText);
+        // comparableArray.sort(compareFunction);
+        // const sortedArray = comparableArray.map(x => x[1]);
+    }
+    
+    // let firstAvailableOption;
+    // availableOptions.each(function(element, index) {
+    //     // Will print 0 First, 1 Second, 2 Third.
+    //     element.getText().then(function(text) {
+    //         console.log(index, text);
+    //     });
+    // });
+
+    // try {
+    //     availableOptions.each(function(element, index) {
+    //         // Will print 0 First, 1 Second, 2 Third.
+    //         element.getText().then(function(text) {
+    //             console.log(index, text);
+    //         });
+    //     });
+
+    //     function onEachOption(element) {
+
+    //     }
+    //     [1, 2, 3].forEach(function(el) {
+    //         console.log(el);
+    //         if (el === 2) throw BreakException;
+    //     });
+    // } catch (e) {
+    //     if (e !== BreakException) throw e;
+
+    // }
 }
 
 
