@@ -110,9 +110,16 @@ describe('Base Protractor Tests', function() {
     });
 
     fdescribe('getFirstAvailableSelectValue', () => {
-        it('should', () => {
+        it('should', function(done) {
             let select = element(by.id('marital-status'));
-            protractor.getFirstAvailableSelectValue(select);
+            let firstOption = protractor.getFirstAvailableSelectValue(select);
+            console.log(firstOption);
+            // firstOption.then(el => {
+            //     el.getText().then(txt => {
+            //         console.log(txt);
+            //         done();
+            //     });
+            // });
         });
     });
 
