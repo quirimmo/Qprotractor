@@ -370,73 +370,16 @@ function filterElementByAttributeChecked(el) {
 }
 
 function getFirstAvailableSelectValue(selectElement) {
-    return asyncPlugin(asyncFn)();
+    let availableOptions = selectElement.all(by.tagName('option'));
+    let mapTextsElementsArrayFinder = availableOptions.filter(filterFirstOptionWithNoEmptyText).first();
+    return mapTextsElementsArrayFinder;
 
-    function asyncFn() {
-        const availableOptions = awaitPlugin(selectElement.all(by.tagName('option')));
-        const mapTextsElements = awaitPlugin(availableOptions.map(asyncPlugin(x => [awaitPlugin(x.getText()), awaitPlugin(x)])));
-        return awaitPlugin(mapTextsElements[1][1].then(el => el));
+    function filterFirstOptionWithNoEmptyText(el, index) {
+        if (index > 0) {
+            return el.getText().then(txt => txt.length > 0);
+        }
+        return false;
     }
-    // return selectElement.all(by.tagName('option'))
-    //     .filter(getFirstNotEmptyElement);
-
-    // function getFirstNotEmptyElement(element) {
-    //     return element.getText()
-    //         .then(checkText)
-    //         .catch(onCatchGenericError);
-
-    //     function checkText(text) {
-    //         return text.length > 0;
-    //     }
-    // }
-    // const availableOptions = selectElement.all(by.tagName('option'));
-    // let availableOption;
-    // let BreakException = {};
-    // // asyncPlugin(asyncFn.bind(this))();
-    // return asyncPlugin(asyncFn)();
-
-    // function asyncFn() {
-    //     let texts = awaitPlugin(availableOptions.map(asyncPlugin(x => [awaitPlugin(x.getText()), awaitPlugin(x)])));
-    //     return texts;
-    //     // texts.then((texts) => {
-    //     //     console.log(texts);
-    //     // });
-
-    //     // const comparableArray = awaitPlugin(protractor.promise.all(availableOptions.map(asyncPlugin(x => [awaitPlugin(x.getText.bind(x)), x]))));
-    //     // console.log(comparableArray);
-    //     // let firstAvailableNotEmptyText = comparableArray.some((el) => el !== '');
-    //     // console.log(firstAvailableNotEmptyText);
-    //     // comparableArray.sort(compareFunction);
-    //     // const sortedArray = comparableArray.map(x => x[1]);
-    // }
-
-    // let firstAvailableOption;
-    // availableOptions.each(function(element, index) {
-    //     // Will print 0 First, 1 Second, 2 Third.
-    //     element.getText().then(function(text) {
-    //         console.log(index, text);
-    //     });
-    // });
-
-    // try {
-    //     availableOptions.each(function(element, index) {
-    //         // Will print 0 First, 1 Second, 2 Third.
-    //         element.getText().then(function(text) {
-    //             console.log(index, text);
-    //         });
-    //     });
-
-    //     function onEachOption(element) {
-
-    //     }
-    //     [1, 2, 3].forEach(function(el) {
-    //         console.log(el);
-    //         if (el === 2) throw BreakException;
-    //     });
-    // } catch (e) {
-    //     if (e !== BreakException) throw e;
-
-    // }
 }
 
 
