@@ -42,6 +42,7 @@ An utility library for protractor providing several utility methods which extend
     * [setSelectValueByOptionText(optionText[, elementContainer])](#set-select-value-by-option-text)
     * [ifPresentAndEnabledDoAction(elementToCheck, actionToDo)](#if-present-and-enabled-do-action)
     * [checkErrorValidation(field, errorType[, errorMessage])](#check-error-validation)
+    * [getFirstAvailableSelectValue(selectElement)](#get-first-available-select-value)
     * [getFirstPresentElement(elements)](#get-first-present-element)
 * [Developer Usage](#developer-usage)
 
@@ -683,6 +684,29 @@ Get the first present element within a list of ElementFinder items
 protractor.getFirstPresentElement([element(by.id('a')), element(by.id('marital-status')), element(by.id('b'))]).then(() => {
   // el is the first present element in the given list of ArrayFinder elements given as input
 });
+```
+
+### <a id="get-first-available-select-value"></a>getFirstAvailableSelectValue(selectElement)
+
+Given an ElementFinder corresponding to a select HTML element, returns the first valid option within the select with no empty text.
+Excludes the first element which usually corresponds to a placeholder of the select.
+
+#### Parameters
+
+| Name          | Type            | Description                                                |
+|---------------|-----------------|------------------------------------------------------------|
+| selectElement | `ElementFinder` | The ElementFinder corresponding to the select HTML element |
+
+#### Returns
+
+- `protractor.promise` A promise which holds an ElementFinder corresponding to the first valid option of the select with no empty text
+
+#### Example
+
+```javascript
+let select = element(by.id('my-select-id'));
+let firstOption = protractor.getFirstAvailableSelectValue(select);
+// firstOption is the ElementFinder corresponding to the first valid not empty option of the given select ElementFinder
 ```
 
 <hr>

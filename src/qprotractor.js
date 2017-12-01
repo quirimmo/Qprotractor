@@ -371,9 +371,11 @@ function filterElementByAttributeChecked(el) {
 
 
 /**
- * Given an ElementFinder corresponding to a select HTML element, returns the first valid option within the select with no empty text
+ * @description
+ * Given an ElementFinder corresponding to a select HTML element, returns the first valid option within the select with no empty text. 
+ * Excludes the first element which usually corresponds to a placeholder of the select.
  * @param {ElementFinder} selectElement The ElementFinder corresponding to the select element 
- * @returns {protractor.promise} A promise which holds the first valid option of the select with no empty text
+ * @returns {protractor.promise} A promise which holds an ElementFinder corresponding to the first valid option of the select with no empty text
  */
 function getFirstAvailableSelectValue(selectElement) {
     let availableOptions = selectElement.all(by.tagName('option'));
