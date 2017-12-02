@@ -34,6 +34,7 @@ protractor.getElementArrayFinderFromArrayOfElementFinder = getElementArrayFinder
 protractor.setRadioButtonValueByLabelFor = setRadioButtonValueByLabelFor;
 protractor.setRadioButtonValueByLabelText = setRadioButtonValueByLabelText;
 protractor.setSelectValueByOptionText = setSelectValueByOptionText;
+protractor.getFirstAvailableSelectValue = getFirstAvailableSelectValue;
 protractor.onCatchGenericError = onCatchGenericError;
 
 
@@ -192,7 +193,7 @@ function waitAndThenExecute(maxWaitTime, fnToExecute) {
  * @returns {Boolean} True or false depending if the tag is a select or not 
  */
 function isTagSelect() {
-    return asyncPlugin (asyncFn.bind(this))();
+    return asyncPlugin(asyncFn.bind(this))();
 
     function asyncFn() {
         let tag = awaitPlugin(this.getTagName());
@@ -206,13 +207,13 @@ function isTagSelect() {
  * @returns {Boolean} True or false depending if the tag is of the given input type or not 
  */
 function isTagInputType(inputType) {
-    return asyncPlugin (asyncFn.bind(this))();
+    return asyncPlugin(asyncFn.bind(this))();
 
     function asyncFn() {
         let tag = awaitPlugin(this.getTagName());
         if (tag !== 'input') {
             return false;
-        } 
+        }
         let tagInputType = awaitPlugin(this.getAttribute('type'));
         return tagInputType === inputType;
     }
@@ -365,6 +366,27 @@ function filterElementByAttributeChecked(el) {
 
     function checkCheckedValue(value) {
         return value === 'true';
+    }
+}
+
+
+/**
+ * @description
+ * Given an ElementFinder corresponding to a select HTML element, returns the first valid option within the select with no empty text. 
+ * Excludes the first element which usually corresponds to a placeholder of the select.
+ * @param {ElementFinder} selectElement The ElementFinder corresponding to the select element 
+ * @returns {protractor.promise} A promise which holds an ElementFinder corresponding to the first valid option of the select with no empty text
+ */
+function getFirstAvailableSelectValue(selectElement) {
+    let availableOptions = selectElement.all(by.tagName('option'));
+    let mapTextsElementsArrayFinder = availableOptions.filter(filterFirstOptionWithNoEmptyText).first();
+    return mapTextsElementsArrayFinder;
+
+    function filterFirstOptionWithNoEmptyText(el, index) {
+        if (index > 0) {
+            return el.getText().then(txt => txt.length > 0);
+        }
+        return false;
     }
 }
 
